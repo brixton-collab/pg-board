@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>THE COUNT — on-camera scoreboard</title>
+<style>
+  :root{
+    --bg:#070B0A; --ink:#F2F7F4; --dim:#5C6B64;
+    --go:#22C55E; --hot:#EF4444; --warn:#F5B301;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    display:flex; flex-direction:column; overflow:hidden;
+    user-select:none; -webkit-user-select:none;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right)
+            env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  /* Everything here is sized to be read off a phone screen THROUGH a camera, at
+     arm's length, outdoors. That is the whole design constraint: one number, huge,
+     maximum contrast, no chrome competing with it. */
+  #label{
+    text-align:center; padding:3vh 4vw 0;
+    font-size:clamp(13px,3.4vw,22px); font-weight:800; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--dim);
+  }
+  #main{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:0; cursor:pointer; position:relative;
+  }
+  #num{
+    font-size:min(58vw,42vh); font-weight:900; line-height:.86;
+    letter-spacing:-.05em; font-variant-numeric:tabular-nums;
+    transition:transform .09s ease, color .18s ease;
+  }
+  #num.hit{transform:scale(1.09)}
+  #num.done{color:var(--go)}
+  #sub{
+    margin-top:1.5vh; font-size:clamp(15px,4.6vw,30px); font-weight:700;
+    color:var(--dim); letter-spacing:.04em; font-variant-numeric:tabular-nums;
+  }
+  #clock{
+    font-size:clamp(30px,11vw,80px); font-weight:900; letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums; text-align:center; padding-bottom:2vh;
+  }
+  #clock.run{color:var(--ink)} #clock.low{color:var(--warn)} #clock.out{color:var(--hot)}
+  #clock.idle{color:var(--dim)}
+  /* two-way vote */
+  #vote{flex:1; display:none; flex-direction:column}
+  #pct{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    font-size:min(40vw,30vh); font-weight:900; letter-spacing:-.05em;
+    font-variant-numeric:tabular-nums; color:var(--go);
+  }
+  #pct small{font-size:.32em; font-weight:800; color:var(--dim); margin-left:.06em}
+  #tally{
+    text-align:center; font-size:clamp(15px,4.4vw,28px); font-weight:700;
+    color:var(--dim); padding-bottom:2vh; font-variant-numeric:tabular-nums;
+  }
+  #btns{display:flex; gap:2px; height:26vh}
+  #btns button{
+    flex:1; border:0; font-family:inherit; font-size:clamp(20px,6.5vw,42px);
+    font-weight:900; letter-spacing:.08em; text-transform:uppercase;
+    color:#070B0A; cursor:pointer;
+  }
+  #bA{background:var(--go)} #bB{background:var(--hot)}
+  #btns button:active{filter:brightness(.8)}
+  /* the only chrome on the page, and it hides while filming */
+  #bar{
+    display:flex; gap:1px; background:#121B17; opacity:.5; transition:opacity .2s;
+  }
+  #bar:hover{opacity:1}
+  #bar button{
+    flex:1; background:#0D1512; color:var(--dim); border:0; padding:14px 4px;
+    font-family:inherit; font-size:11px; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; cursor:pointer;
+  }
+  #bar button:active{background:#182420; color:var(--ink)}
+  #help{
+    position:fixed; inset:0; background:rgba(7,11,10,.97); padding:8vh 7vw;
+    overflow:auto; display:none; font-size:15px; line-height:1.65;
+  }
+  #help.on{display:block}
+  #help h2{font-size:13px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--go); margin:0 0 18px}
+  #help code{background:#121B17; padding:2px 6px; border-radius:3px; font-size:13px}
+  #help p{margin:0 0 14px; color:#B8C6BF; max-width:56ch}
+  #help b{color:var(--ink)}
+  #help button{
+    margin-top:10px; background:var(--go); color:#070B0A; border:0; padding:14px 26px;
+    font:800 14px/1 inherit; letter-spacing:.12em; text-transform:uppercase;
+    border-radius:4px; cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="label">COUNT</div>
+
+<div id="main">
+  <div id="num">0</div>
+  <div id="sub"></div>
+</div>
+
+<div id="vote">
+  <div id="pct">0<small>%</small></div>
+  <div id="tally">0 of 0</div>
+  <div id="btns"><button id="bA">KEEP</button><button id="bB">FIRE</button></div>
+</div>
+
+<div id="clock" class="idle">--:--</div>
+
+<div id="bar">
+  <button id="start">Start</button>
+  <button id="undo">Undo</button>
+  <button id="reset">Reset</button>
+  <button id="modes">Mode</button>
+  <button id="qhelp">?</button>
+</div>
+
+<div id="help">
+  <h2>The Count — how to use it on camera</h2>
+  <p><b>Tap the big number to add one.</b> That is the whole thing. It is built to be
+  filmed: one number, as large as the screen allows, high contrast, nothing else moving.</p>
+  <p><b>Start</b> runs the clock. <b>Undo</b> removes the last tap — use it when someone
+  walks off mid-answer. <b>Reset</b> clears everything for the next take.</p>
+  <p><b>Mode</b> cycles: <b>COUNT</b> (a plain tally) → <b>MONEY</b> (adds dollars) →
+  <b>VOTE</b> (two buttons and a live percentage).</p>
+  <p>Set it up ahead of time with the URL so you never fiddle on camera:</p>
+  <p><code>?mode=count&label=YES&target=5&clock=15:00</code><br>
+     <code>?mode=money&label=REVENUE&step=5&target=100&clock=30:00</code><br>
+     <code>?mode=vote&a=KEEP&b=FIRE</code></p>
+  <p><b>Turn the phone to landscape</b> and the number fills the frame.
+  Turn <b>Do Not Disturb</b> on — a banner ruins the take.</p>
+  <button onclick="document.getElementById('help').classList.remove('on')">Got it</button>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const q = new URLSearchParams(location.search);
+  const MODES = ["count", "money", "vote"];
+
+  const S = {
+    mode:   MODES.includes((q.get("mode") || "").toLowerCase())
+              ? q.get("mode").toLowerCase() : "count",
+    label:  q.get("label") || "",
+    step:   Math.max(1, parseInt(q.get("step") || "1", 10) || 1),
+    target: parseInt(q.get("target") || "0", 10) || 0,
+    n: 0, hist: [], a: 0, b: 0,
+    aName: (q.get("a") || "KEEP").toUpperCase().slice(0, 10),
+    bName: (q.get("b") || "FIRE").toUpperCase().slice(0, 10),
+    secs: 0, left: 0, tick: null,
+  };
+
+  // clock=MM:SS or plain seconds
+  (() => {
+    const c = q.get("clock");
+    if (!c) return;
+    const m = /^(\d+):(\d{1,2})$/.exec(c);
+    S.secs = m ? (+m[1] * 60 + +m[2]) : (parseInt(c, 10) || 0);
+    S.left = S.secs;
+  })();
+
+  const defLabel = () => S.label
+    || (S.mode === "money" ? "REVENUE" : S.mode === "vote" ? S.aName + " vs " + S.bName : "COUNT");
+
+  const fmtClock = s => {
+    s = Math.max(0, s);
+    return String((s / 60) | 0).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  };
+
+  function draw() {
+    $("label").textContent = defLabel();
+    const isVote = S.mode === "vote";
+    $("main").style.display = isVote ? "none" : "flex";
+    $("vote").style.display = isVote ? "flex" : "none";
+
+    if (isVote) {
+      const tot = S.a + S.b;
+      $("pct").innerHTML = (tot ? Math.round(S.a / tot * 100) : 0) + "<small>%</small>";
+      $("tally").textContent = `${S.a} ${S.aName} · ${S.b} ${S.bName}`;
+      $("bA").textContent = S.aName;
+      $("bB").textContent = S.bName;
+    } else {
+      $("num").textContent = (S.mode === "money" ? "$" : "") + S.n.toLocaleString();
+      const hit = S.target && S.n >= S.target;
+      $("num").classList.toggle("done", !!hit);
+      $("sub").textContent = S.target
+        ? (hit ? "TARGET HIT" : "of " + (S.mode === "money" ? "$" : "") + S.target.toLocaleString())
+        : "";
+    }
+
+    const c = $("clock");
+    if (!S.secs) { c.textContent = "--:--"; c.className = "idle"; }
+    else {
+      c.textContent = fmtClock(S.left);
+      c.className = S.left <= 0 ? "out" : S.left <= 30 ? "low" : S.tick ? "run" : "idle";
+    }
+  }
+
+  function bump(by) {
+    S.n += by; S.hist.push(by);
+    const el = $("num");
+    el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit");
+    if (navigator.vibrate) navigator.vibrate(18);
+    draw();
+  }
+
+  $("main").addEventListener("click", () => bump(S.mode === "money" ? S.step : 1));
+  $("bA").addEventListener("click", () => { S.a++; S.hist.push("a"); draw(); });
+  $("bB").addEventListener("click", () => { S.b++; S.hist.push("b"); draw(); });
+
+  $("undo").addEventListener("click", e => {
+    e.stopPropagation();
+    const last = S.hist.pop();
+    if (last === "a") S.a = Math.max(0, S.a - 1);
+    else if (last === "b") S.b = Math.max(0, S.b - 1);
+    else if (typeof last === "number") S.n = Math.max(0, S.n - last);
+    draw();
+  });
+
+  $("reset").addEventListener("click", e => {
+    e.stopPropagation();
+    S.n = 0; S.a = 0; S.b = 0; S.hist = [];
+    clearInterval(S.tick); S.tick = null; S.left = S.secs;
+    draw();
+  });
+
+  $("start").addEventListener("click", e => {
+    e.stopPropagation();
+    if (!S.secs) return;
+    if (S.tick) { clearInterval(S.tick); S.tick = null; draw(); return; }
+    S.tick = setInterval(() => {
+      S.left--;
+      if (S.left <= 0) { S.left = 0; clearInterval(S.tick); S.tick = null;
+                         if (navigator.vibrate) navigator.vibrate([90, 60, 90]); }
+      draw();
+    }, 1000);
+    draw();
+  });
+
+  $("modes").addEventListener("click", e => {
+    e.stopPropagation();
+    S.mode = MODES[(MODES.indexOf(S.mode) + 1) % MODES.length];
+    S.n = 0; S.a = 0; S.b = 0; S.hist = [];
+    draw();
+  });
+
+  $("qhelp").addEventListener("click", e => {
+    e.stopPropagation(); $("help").classList.add("on");
+  });
+
+  // Keep the screen awake — a phone that sleeps mid-take kills the shot.
+  if ("wakeLock" in navigator) {
+    const hold = () => navigator.wakeLock.request("screen").catch(() => {});
+    hold();
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") hold();
+    });
+  }
+
+  if (!q.toString()) $("help").classList.add("on");
+  draw();
+})();
+</script>
+</body>
+</html>
