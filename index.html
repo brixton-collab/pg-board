@@ -348,7 +348,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <div class="top">
   <h1>The Board</h1>
   <span class="when"><b id="today">12 September 2026</b>
-    <span class="built" id="built" data-utc="2026-09-12T20:16:01.060543+00:00">built 4:16pm</span></span>
+    <span class="built" id="built" data-utc="2026-09-12T20:18:28.032639+00:00">built 4:18pm</span></span>
 </div>
 
 <style>
@@ -2002,12 +2002,12 @@ apply("all");
 <section class="gi">
   <div class="gi-head">
     <div><p class="gi-kick">Genius Mode</p><h2>Give me the thought. Get back the shoot.</h2>
-      <p>Tell Codex or Claude <b>Idea: …</b> in your own words. It lands here while I
+      <p>Tell Codex—or Claude Code on this Mac—<b>Idea: …</b> in your own words. It lands here while I
       build the hooks, game, proof and filming plan. Once the card is complete, it
       moves to <b>Shoot</b>.</p></div>
     <button class="gi-copy" type="button" onclick="copyIdeaPrompt(this)">Copy idea prompt</button>
   </div>
-  <div class="gi-grid"><div class="gi-empty"><b>No conversation ideas are waiting.</b><span>Send one in Codex or Claude and it will appear here.</span></div></div>
+  <div class="gi-grid"><div class="gi-empty"><b>No conversation ideas are waiting.</b><span>Send one in Codex or Claude Code on this Mac and it will appear here.</span></div></div>
   <div id="legacy-working-ideas"></div>
 </section></div></div>
 
@@ -2077,7 +2077,7 @@ apply("all");
 function copyIdeaPrompt(button){
   var prompt='Idea: ';
   function done(){
-    var old=button.textContent; button.textContent='Copied — paste into Codex or Claude';
+    var old=button.textContent; button.textContent='Copied — paste into Codex';
     setTimeout(function(){button.textContent=old;},2200);
   }
   if(navigator.clipboard && navigator.clipboard.writeText){
