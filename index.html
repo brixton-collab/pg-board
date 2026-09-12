@@ -26,190 +26,26 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
 .tab.on{color:var(--ink);border-bottom-color:var(--ink)}
 .tab:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .pane{display:none} .pane.on{display:block}
-.tabs .tab-work{opacity:.55} .tabs .tab-work[aria-selected=true]{opacity:1}
-.pane-work{max-width:1240px;margin:0 auto;padding:0 24px}
-.pane-work .wrap{max-width:100%;padding:0;margin:0}
-.gi{padding:0 0 56px}
-.gi-head{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;
- border:1px solid var(--line);padding:24px;margin:0 0 24px;background:var(--hair)}
-.gi-kick{margin:0 0 7px!important;font-family:var(--mono);font-size:12px!important;
- font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#C8462F!important}
-.gi-head h2{margin:0 0 8px;font-size:clamp(22px,3.5vw,34px);line-height:1.08;letter-spacing:-.03em}
-.gi-head p{margin:0;max-width:700px;font-size:15px;line-height:1.55;color:var(--ink3)}
-.gi-copy{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);
- border-radius:0;padding:12px 15px;font:700 14px var(--sans);white-space:nowrap;cursor:pointer}
-.gi-copy:focus-visible{outline:2px solid #C8462F;outline-offset:3px}
-.gi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:28px}
-.gi-card{border:1px solid var(--line);background:var(--bg);padding:19px}
-.gi-top{display:flex;justify-content:space-between;gap:12px;font:700 11px var(--mono);
- letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
-.gi-card h3{margin:11px 0 7px;font-size:20px;letter-spacing:-.02em}
-.gi-raw{margin:0 0 16px;font-size:15px;line-height:1.55}
-.gi-preview{border-top:1px solid var(--line);padding-top:13px;display:grid;gap:11px}
-.gi-preview span,.gi-next span{display:block;margin-bottom:3px;font:800 10px var(--mono);
- text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
-.gi-preview p,.gi-next p{margin:0;font-size:14px;line-height:1.5}
-.gi-next{margin-top:15px;border-left:3px solid #C8462F;padding:3px 0 3px 11px}
-.gi-meta{margin:14px 0 0;font-size:11px;color:var(--ink3)}
-.gi-empty{grid-column:1/-1;border:1px dashed var(--line);padding:28px;display:flex;
- flex-direction:column;gap:4px;color:var(--ink3)}
-.gi-empty b{color:var(--ink);font-size:16px}
-#legacy-working-ideas>section{margin-top:32px}
 .system-work{max-width:1240px;margin:40px auto 64px;padding:0 24px;color:var(--ink3)}
 .system-work>summary{cursor:pointer;font:700 13px var(--mono);letter-spacing:.04em;
  border-top:1px solid var(--line);padding:16px 0}
 .system-work-body{padding-top:10px}
+.pane-res .topline,.pane-res .fnl-body>p:last-child{display:none!important}
+.pane-res .ins-more{margin:12px 0 0;border-top:1px solid var(--rule);padding-top:12px}
+.pane-res .ins-more>summary{cursor:pointer;font:800 12px var(--mono);letter-spacing:.05em;
+ text-transform:uppercase;color:var(--ink-3);padding:8px 0 16px}
+.pane-res .ins-more>section,.pane-res .ins-more>details{margin-top:20px}
 @media print{.tabs,.top{display:none} .pane{display:block!important}}
-@media(max-width:620px){.top{padding:28px 18px 0} .tabs{padding:0 18px;gap:20px}
- .pane-work{padding:0 18px} .gi-head{padding:19px;flex-direction:column}
- .gi-copy{width:100%}}
-
-:root{
-  --paper:#edf0ec; --card:#fff; --card-2:#f5f7f3; --rule:#d3dad2; --rule-2:#bcc6ba;
-  --ink:#131a18; --ink-2:#3f4d47; --ink-3:#69776f; --ink-4:#8c9a92;
-  --acc:#a8801a; --acc-bg:#faf1d6; --acc-line:#e6c33c;
-  --go:#2f7a4d; --go-bg:#e2f0e6; --wk:#5d5470; --wk-bg:#ece8f2;
-  --ed:#7a6a2f; --ed-bg:#f2eedd; --dead:#a8452f; --dead-bg:#f8e5df;
-  --shadow:0 1px 2px rgba(19,26,24,.06),0 10px 28px -20px rgba(19,26,24,.4);
-  --pad:clamp(16px,4vw,40px);
-  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0f1513; --card:#171f1c; --card-2:#1c2622; --rule:#26332e; --rule-2:#38473f;
-  --ink:#e8eeea; --ink-2:#b3c0b8; --ink-3:#8b9a92; --ink-4:#6c7a72;
-  --acc:#e6c33c; --acc-bg:#2a2413; --acc-line:#8a731f;
-  --go:#6fc08c; --go-bg:#16281d; --wk:#b3a6cc; --wk-bg:#211c2b;
-  --ed:#cbb96b; --ed-bg:#241f10; --dead:#e08c74; --dead-bg:#2c1a15;
-  --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px rgba(0,0,0,.9);
-}}
-:root[data-theme="dark"]{
-  --paper:#0f1513; --card:#171f1c; --card-2:#1c2622; --rule:#26332e; --rule-2:#38473f;
-  --ink:#e8eeea; --ink-2:#b3c0b8; --ink-3:#8b9a92; --ink-4:#6c7a72;
-  --acc:#e6c33c; --acc-bg:#2a2413; --acc-line:#8a731f;
-  --go:#6fc08c; --go-bg:#16281d; --wk:#b3a6cc; --wk-bg:#211c2b;
-  --ed:#cbb96b; --ed-bg:#241f10; --dead:#e08c74; --dead-bg:#2c1a15;
-  --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px rgba(0,0,0,.9);
-}.pane-shoot *{box-sizing:border-box}.pane-shoot body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans);
-     -webkit-font-smoothing:antialiased}.pane-shoot .wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad)}.pane-shoot header{border-bottom:1px solid var(--rule)}.pane-shoot .mast{padding:34px 0 22px;display:flex;flex-direction:column;gap:15px}.pane-shoot .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4)}.pane-shoot h1{margin:0;font-size:clamp(29px,5vw,44px);font-weight:760;letter-spacing:-.035em;line-height:1.04;
-   text-wrap:balance}.pane-shoot h1 em{font-style:normal;color:var(--acc)}.pane-shoot .deck{font-size:16px;color:var(--ink-2);max-width:68ch;line-height:1.5;margin:0}.pane-shoot .deck b{color:var(--ink)}.pane-shoot .rules{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:14px 17px}.pane-shoot .rules .lab{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc);
-     margin-bottom:9px;display:block}.pane-shoot .rules ul{margin:0;padding-left:18px;display:grid;gap:5px}.pane-shoot .rules li{font-size:14.5px;line-height:1.45;color:var(--ink)}.pane-shoot .bar{background:transparent;
-     padding:11px 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center}.pane-shoot button{font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 13px;
-       border-radius:2px;cursor:pointer;background:transparent;border:1px solid var(--rule-2);
-       color:var(--ink-3);transition:color .12s,border-color .12s,background .12s}.pane-shoot button:hover{color:var(--ink);border-color:var(--ink-3)}.pane-shoot button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}.pane-shoot button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.pane-shoot .count{font:500 12px var(--mono);color:var(--ink-4);margin-left:auto;font-variant-numeric:tabular-nums}.pane-shoot h2{margin:46px 0 6px;font-size:13px;font-weight:700;font-family:var(--mono);letter-spacing:.16em;
-   text-transform:uppercase;color:var(--ink)}.pane-shoot .sdeck{margin:0 0 20px;font-size:14.5px;color:var(--ink-3);max-width:76ch;line-height:1.5}.pane-shoot .sdeck b{color:var(--ink-2);font-weight:650}.pane-shoot .stack{display:grid;gap:14px}.pane-shoot .card{background:var(--card);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow);
-      display:grid;grid-template-columns:52px 1fr;overflow:hidden}.pane-shoot .rail{border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;
-      gap:10px;padding:14px 0;background:var(--card-2)}.pane-shoot .num{font:700 15px/1 var(--mono)}.pane-shoot .railtxt{writing-mode:vertical-rl;font:700 9.5px/1 var(--mono);letter-spacing:.19em;
-         text-transform:uppercase;white-space:nowrap}.pane-shoot .GO .rail{background:var(--go-bg)}.pane-shoot .GO .num, .pane-shoot .GO .railtxt{color:var(--go)}.pane-shoot .ED .rail{background:var(--ed-bg)}.pane-shoot .ED .num, .pane-shoot .ED .railtxt{color:var(--ed)}.pane-shoot .WK .rail{background:var(--wk-bg)}.pane-shoot .WK .num, .pane-shoot .WK .railtxt{color:var(--wk)}.pane-shoot .body{padding:16px 20px 18px;display:grid;gap:13px;min-width:0}.pane-shoot .t{margin:0;font-size:19.5px;font-weight:700;letter-spacing:-.021em;line-height:1.25;text-wrap:balance}.pane-shoot .tags{display:flex;gap:6px;flex-wrap:wrap}.pane-shoot .tag{font:600 10px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;padding:5px 8px;
-     border-radius:2px;border:1px solid var(--rule-2);color:var(--ink-3)}.pane-shoot .tag.hit{border-color:var(--go);color:var(--go);background:var(--go-bg);font-weight:700}.pane-shoot .tag.warn{border-color:var(--dead);color:var(--dead);background:var(--dead-bg);font-weight:700}.pane-shoot .lab{font:700 10px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);
-     margin-bottom:7px;display:block}.pane-shoot .fl{display:grid;gap:3px}.pane-shoot .one{margin:0;font-size:clamp(17px,2vw,20px);line-height:1.36;font-weight:660;color:var(--ink);
-     text-wrap:pretty}.pane-shoot .film{margin:0;padding-left:19px;display:grid;gap:7px}.pane-shoot .film li{font-size:14.5px;line-height:1.5;color:var(--ink-2)}.pane-shoot .film li b{color:var(--ink);font-weight:660}.pane-shoot .ct{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);
-    border-radius:3px;overflow:hidden}.pane-shoot .ct>div{background:var(--card-2);padding:11px 13px;min-width:0}.pane-shoot .ct p{margin:0;font-size:13.5px;line-height:1.45;color:var(--ink-2)}.pane-shoot .ct b{color:var(--ink)}.pane-shoot .ct .c .lab{color:var(--acc)}.pane-shoot .ct .r .lab{color:var(--go)}.pane-shoot .watch{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-shoot .watch .lab{color:var(--acc);margin-bottom:6px}.pane-shoot .watch ul{margin:0;padding-left:18px;display:grid;gap:6px}.pane-shoot .watch li{font-size:14px;line-height:1.45;color:var(--ink-2);overflow-wrap:anywhere}.pane-shoot .watch li b{color:var(--ink)}.pane-shoot .watch a{color:var(--acc);font-weight:600}.pane-shoot .steal{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-shoot .steal .lab{color:var(--acc);margin-bottom:5px}.pane-shoot .steal p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink);font-weight:560}.pane-shoot .vbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;
-  padding-bottom:11px;border-bottom:1px solid var(--hair);margin-bottom:2px}.pane-shoot .vk{font:600 11.5px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;
-  padding:5px 9px;border-radius:3px}.pane-shoot .vk-shoot{color:#14653F;background:#DFEDE5}.pane-shoot .vk-rework{color:#8A5A10;background:#F6EBD5}.pane-shoot .vk-kill{color:#93291F;background:#F6E1DE}.pane-shoot .vscore{font:800 19px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}.pane-shoot .vscore small{font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:0}.pane-shoot .mtags{display:flex;flex-wrap:wrap;gap:5px;margin-left:auto}.pane-shoot .mtag{font:600 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;
-  color:var(--ink-3);border:1px solid var(--line);border-radius:2px;padding:4px 7px}.pane-shoot .angle{margin:0;font-size:15px;line-height:1.5;color:var(--ink-2);font-style:italic}.pane-shoot .alts p, .pane-shoot .game p, .pane-shoot .mid p, .pane-shoot .receipt p, .pane-shoot .payoff p, .pane-shoot .engage p, .pane-shoot .cta p, .pane-shoot .promise p, .pane-shoot .howfilm{
-  margin:0;font-size:15.5px;line-height:1.5}.pane-shoot .alts p{font-weight:560}.pane-shoot .game{border-left:3px solid var(--acc);padding:2px 0 2px 12px}.pane-shoot .game p{font-weight:600}.pane-shoot .howfilm{margin:5px 0 9px !important;font-size:15px;color:var(--ink-2);font-style:italic}.pane-shoot .hist{border-left:3px solid var(--line);padding:2px 0 2px 12px}.pane-shoot .hist p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-3)}.pane-shoot .beats{margin:5px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:5px}.pane-shoot .beats li{font-size:15px;line-height:1.45}.pane-shoot .receipt p{font-weight:560}.pane-shoot .cta{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-shoot .cta .lab{color:var(--acc);margin-bottom:5px}.pane-shoot .cta p{font-weight:600}.pane-shoot .promise p{font-size:14px;color:var(--ink-2)}.pane-shoot .ev{font:800 19px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums;
-  color:var(--go)}.pane-shoot .ev small{display:block;font:600 9px/1 var(--mono);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-3);margin-top:3px}.pane-shoot .ev-m{color:var(--acc)}.pane-shoot .evwhy{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:var(--ink-3);max-width:70ch}.pane-shoot .pillar{font:700 10px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;
-  color:var(--acc);margin-bottom:9px}.pane-shoot .risk{margin:10px 0 0;padding:9px 12px;border-left:3px solid var(--dead);
-  background:var(--dead-bg);font-size:14px;line-height:1.5;color:var(--ink-2)}.pane-shoot .risk b{color:var(--dead);font-weight:700;margin-right:6px}.pane-shoot .sbreak{margin:2px 0 0;font:500 11px/1.6 var(--mono);color:var(--ink-3);
-  padding-top:9px;border-top:1px solid var(--hair)}.pane-shoot .say{border:1px solid var(--go);background:var(--go-bg);border-radius:3px;padding:13px 15px}.pane-shoot .say .lab{color:var(--go)}.pane-shoot .say p{margin:0 0 9px;font-size:15.5px;line-height:1.5;color:var(--ink);font-weight:560}.pane-shoot .say p:last-child{margin-bottom:0}.pane-shoot .qs{border:1px solid var(--wk);background:var(--wk-bg);border-radius:3px;padding:11px 14px;display:grid;gap:7px}.pane-shoot .qs .lab{color:var(--wk);margin-bottom:0}.pane-shoot .qs p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2)}.pane-shoot .qs p b{color:var(--ink)}.pane-shoot .note{font-size:13px;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--rule-2);padding-left:11px;margin:0}.pane-shoot .note b{color:var(--ink-2);font-weight:650}.pane-shoot .note.kill{border-left-color:var(--dead)}.pane-shoot .note.kill b{color:var(--dead)}.pane-shoot details.fold{border:1px solid var(--rule);border-left:4px solid var(--ed);border-radius:4px;
-  background:var(--card);margin-top:34px;box-shadow:var(--shadow)}.pane-shoot details.fold>summary{cursor:pointer;list-style:none;padding:15px 18px;display:flex;
-  align-items:center;gap:14px;flex-wrap:wrap}.pane-shoot details.fold>summary::-webkit-details-marker{display:none}.pane-shoot details.fold>summary::before{content:"▸";color:var(--ed);font-weight:700;font-size:15px}.pane-shoot details.fold[open]>summary::before{content:"▾"}.pane-shoot .fh{font:700 13px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}.pane-shoot .fn{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ed);
-    background:var(--ed-bg);border:1px solid var(--ed);border-radius:2px;padding:4px 8px;margin-left:auto}.pane-shoot .foldb{padding:0 18px 18px}.pane-shoot .foldb .sdeck{margin-top:0}.pane-shoot footer{margin:54px 0 90px;padding-top:22px;border-top:1px solid var(--rule);font-size:13.5px;
-       color:var(--ink-3);line-height:1.6}.pane-shoot footer b{color:var(--ink-2)}.pane-shoot footer ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
-@media (max-width:760px){.ct{grid-template-columns:1fr}.pane-shoot .card{grid-template-columns:40px 1fr}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}.pane-shoot #p-shoot .gst{max-width:1240px;margin:0 auto 34px;padding:0 24px}.pane-shoot #p-shoot .gst-in{border:2px solid var(--ink);background:var(--bg);padding:22px 26px 20px}.pane-shoot #p-shoot .gst-kick{margin:0 0 10px;font-family:var(--mono);font-size:11px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:#C8462F}.pane-shoot #p-shoot .gst-hook{margin:0 0 6px;font-size:clamp(21px,3.4vw,32px);line-height:1.25;
-  letter-spacing:-.025em;font-weight:800}.pane-shoot #p-shoot .gst-say{margin:0 0 20px;font-size:12.5px;color:var(--ink3);
-  font-family:var(--mono);letter-spacing:.02em}.pane-shoot #p-shoot .gst-alt{border-left:3px solid #C8462F;padding:3px 0 3px 13px;margin:0 0 18px}.pane-shoot #p-shoot .gst-alt p{margin:0 0 4px;font-size:16px;line-height:1.35;font-weight:700}.pane-shoot #p-shoot .gst-altnote{font-size:11.5px;color:var(--ink3)}.pane-shoot #p-shoot .gst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px 26px;padding-top:17px;border-top:1px solid var(--line)}.pane-shoot #p-shoot .gst-lab{display:block;font-family:var(--mono);font-size:9.5px;font-weight:800;
-  letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}.pane-shoot #p-shoot .gst-f p{margin:0;font-size:14px;line-height:1.5}.pane-shoot #p-shoot .gst-f ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:5px}.pane-shoot #p-shoot .gst-f li{font-size:14px;line-height:1.5}.pane-shoot #p-shoot .gst-foot{margin:18px 0 0;padding-top:13px;border-top:1px solid var(--line);
-  font-size:12px;color:var(--ink3)}.pane-shoot #p-shoot .rcwrap{max-width:1240px;margin:0 auto 40px;padding:0 24px}.pane-shoot #p-shoot .rc-head{border-left:5px solid #C8462F;padding:2px 0 2px 15px;margin:0 0 20px}.pane-shoot #p-shoot .rc-head h2{margin:0 0 7px;font-size:clamp(19px,2.8vw,26px);letter-spacing:-.02em}.pane-shoot #p-shoot .rc-head p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink3);max-width:82ch}.pane-shoot #p-shoot .rc{display:flex;gap:0;border:1px solid var(--line);background:var(--bg);margin:0 0 16px}.pane-shoot #p-shoot .rc-rail{flex:0 0 92px;border-right:1px solid var(--line);padding:15px 12px;
-  display:flex;flex-direction:column;gap:6px;background:var(--hair)}.pane-shoot #p-shoot .rc-n{font-family:var(--mono);font-size:16px;font-weight:800}.pane-shoot #p-shoot .rc-railtxt{font-family:var(--mono);font-size:9.5px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);line-height:1.3}.pane-shoot #p-shoot .rc-body{flex:1;min-width:0;padding:16px 20px 18px}.pane-shoot #p-shoot .rc-pillar{font-family:var(--mono);font-size:10px;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:#C8462F;margin-bottom:6px}.pane-shoot #p-shoot .rc-t{margin:0 0 9px;font-size:16.5px;line-height:1.35;font-weight:700}.pane-shoot #p-shoot .rc-t a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}.pane-shoot #p-shoot .rc-t a:hover{color:#C8462F;border-color:#C8462F}.pane-shoot #p-shoot .rc-t a::before{content:"\25B6 ";font-size:9px;color:#C8462F;vertical-align:1px}.pane-shoot #p-shoot .rc-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;
-  padding:9px 0 11px;border-bottom:1px solid var(--hair);margin-bottom:12px}.pane-shoot #p-shoot .rc-miss{font-size:18px;font-weight:800;color:#C8462F;white-space:nowrap}.pane-shoot #p-shoot .rc-miss small{display:block;font-size:9px;font-weight:700;letter-spacing:.04em;
-  text-transform:uppercase;color:var(--ink3);margin-top:2px}.pane-shoot #p-shoot .rc-meta{font-size:11.5px;color:var(--ink3);line-height:1.5}.pane-shoot #p-shoot .rc-lab{display:block;font-family:var(--mono);font-size:9.5px;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}.pane-shoot #p-shoot .rc-leak{margin:0 0 13px;font-size:13.5px;line-height:1.55;color:var(--ink3)}.pane-shoot #p-shoot .rc-pick{border-left:3px solid #C8462F;padding:2px 0 2px 13px;margin:0 0 14px}.pane-shoot #p-shoot .rc-do{margin:0;font-size:15.5px;line-height:1.5;font-weight:600}.pane-shoot #p-shoot .rc-why{margin:6px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink3)}.pane-shoot #p-shoot .rc-alt{margin:0 0 13px}.pane-shoot #p-shoot .rc-alt ul{margin:0;padding-left:19px;display:flex;flex-direction:column;gap:6px}.pane-shoot #p-shoot .rc-alt li{font-size:13.5px;line-height:1.5;color:var(--ink3)}.pane-shoot #p-shoot .rc-kind{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;
-  letter-spacing:.06em;padding:1px 6px;margin-right:7px;border:1px solid var(--line);
-  color:var(--ink3);vertical-align:1px}.pane-shoot #p-shoot .rc-asset{margin:0 0 12px;font-size:13px;line-height:1.5}.pane-shoot #p-shoot .rc-say{background:var(--hair);border-left:3px solid var(--ink);padding:11px 14px;margin:0 0 11px}.pane-shoot #p-shoot .rc-say p{margin:0;font-size:14.5px;line-height:1.55;font-style:italic}.pane-shoot #p-shoot .rc-ed{margin:0;font-size:11.5px;color:var(--ink3)}
-@media(max-width:640px){#p-shoot .rc{flex-direction:column}.pane-shoot #p-shoot .rc-rail{flex-direction:row;align-items:center;border-right:0;
-    border-bottom:1px solid var(--line);flex:0 0 auto}}
-
-
-:root{
-  --paper:#edf0ec; --card:#fff; --card-2:#f5f7f3; --rule:#d3dad2; --rule-2:#bcc6ba;
-  --ink:#131a18; --ink-2:#3f4d47; --ink-3:#69776f; --ink-4:#8c9a92;
-  --acc:#a8801a; --acc-bg:#faf1d6; --acc-line:#e6c33c;
-  --go:#2f7a4d; --go-bg:#e2f0e6; --wk:#5d5470; --wk-bg:#ece8f2;
-  --ed:#7a6a2f; --ed-bg:#f2eedd; --dead:#a8452f; --dead-bg:#f8e5df;
-  --shadow:0 1px 2px rgba(19,26,24,.06),0 10px 28px -20px rgba(19,26,24,.4);
-  --pad:clamp(16px,4vw,40px);
-  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0f1513; --card:#171f1c; --card-2:#1c2622; --rule:#26332e; --rule-2:#38473f;
-  --ink:#e8eeea; --ink-2:#b3c0b8; --ink-3:#8b9a92; --ink-4:#6c7a72;
-  --acc:#e6c33c; --acc-bg:#2a2413; --acc-line:#8a731f;
-  --go:#6fc08c; --go-bg:#16281d; --wk:#b3a6cc; --wk-bg:#211c2b;
-  --ed:#cbb96b; --ed-bg:#241f10; --dead:#e08c74; --dead-bg:#2c1a15;
-  --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px rgba(0,0,0,.9);
-}}
-:root[data-theme="dark"]{
-  --paper:#0f1513; --card:#171f1c; --card-2:#1c2622; --rule:#26332e; --rule-2:#38473f;
-  --ink:#e8eeea; --ink-2:#b3c0b8; --ink-3:#8b9a92; --ink-4:#6c7a72;
-  --acc:#e6c33c; --acc-bg:#2a2413; --acc-line:#8a731f;
-  --go:#6fc08c; --go-bg:#16281d; --wk:#b3a6cc; --wk-bg:#211c2b;
-  --ed:#cbb96b; --ed-bg:#241f10; --dead:#e08c74; --dead-bg:#2c1a15;
-  --shadow:0 1px 2px rgba(0,0,0,.5),0 12px 30px -22px rgba(0,0,0,.9);
-}.pane-work *{box-sizing:border-box}.pane-work body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans);
-     -webkit-font-smoothing:antialiased}.pane-work .wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad)}.pane-work header{border-bottom:1px solid var(--rule)}.pane-work .mast{padding:34px 0 22px;display:flex;flex-direction:column;gap:15px}.pane-work .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4)}.pane-work h1{margin:0;font-size:clamp(29px,5vw,44px);font-weight:760;letter-spacing:-.035em;line-height:1.04;
-   text-wrap:balance}.pane-work h1 em{font-style:normal;color:var(--acc)}.pane-work .deck{font-size:16px;color:var(--ink-2);max-width:68ch;line-height:1.5;margin:0}.pane-work .deck b{color:var(--ink)}.pane-work .rules{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:14px 17px}.pane-work .rules .lab{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--acc);
-     margin-bottom:9px;display:block}.pane-work .rules ul{margin:0;padding-left:18px;display:grid;gap:5px}.pane-work .rules li{font-size:14.5px;line-height:1.45;color:var(--ink)}.pane-work .bar{background:transparent;
-     padding:11px 0;display:flex;gap:7px;flex-wrap:wrap;align-items:center}.pane-work button{font:600 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 13px;
-       border-radius:2px;cursor:pointer;background:transparent;border:1px solid var(--rule-2);
-       color:var(--ink-3);transition:color .12s,border-color .12s,background .12s}.pane-work button:hover{color:var(--ink);border-color:var(--ink-3)}.pane-work button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}.pane-work button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.pane-work .count{font:500 12px var(--mono);color:var(--ink-4);margin-left:auto;font-variant-numeric:tabular-nums}.pane-work h2{margin:46px 0 6px;font-size:13px;font-weight:700;font-family:var(--mono);letter-spacing:.16em;
-   text-transform:uppercase;color:var(--ink)}.pane-work .sdeck{margin:0 0 20px;font-size:14.5px;color:var(--ink-3);max-width:76ch;line-height:1.5}.pane-work .sdeck b{color:var(--ink-2);font-weight:650}.pane-work .stack{display:grid;gap:14px}.pane-work .card{background:var(--card);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow);
-      display:grid;grid-template-columns:52px 1fr;overflow:hidden}.pane-work .rail{border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;
-      gap:10px;padding:14px 0;background:var(--card-2)}.pane-work .num{font:700 15px/1 var(--mono)}.pane-work .railtxt{writing-mode:vertical-rl;font:700 9.5px/1 var(--mono);letter-spacing:.19em;
-         text-transform:uppercase;white-space:nowrap}.pane-work .GO .rail{background:var(--go-bg)}.pane-work .GO .num, .pane-work .GO .railtxt{color:var(--go)}.pane-work .ED .rail{background:var(--ed-bg)}.pane-work .ED .num, .pane-work .ED .railtxt{color:var(--ed)}.pane-work .WK .rail{background:var(--wk-bg)}.pane-work .WK .num, .pane-work .WK .railtxt{color:var(--wk)}.pane-work .body{padding:16px 20px 18px;display:grid;gap:13px;min-width:0}.pane-work .t{margin:0;font-size:19.5px;font-weight:700;letter-spacing:-.021em;line-height:1.25;text-wrap:balance}.pane-work .tags{display:flex;gap:6px;flex-wrap:wrap}.pane-work .tag{font:600 10px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;padding:5px 8px;
-     border-radius:2px;border:1px solid var(--rule-2);color:var(--ink-3)}.pane-work .tag.hit{border-color:var(--go);color:var(--go);background:var(--go-bg);font-weight:700}.pane-work .tag.warn{border-color:var(--dead);color:var(--dead);background:var(--dead-bg);font-weight:700}.pane-work .lab{font:700 10px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);
-     margin-bottom:7px;display:block}.pane-work .fl{display:grid;gap:3px}.pane-work .one{margin:0;font-size:clamp(17px,2vw,20px);line-height:1.36;font-weight:660;color:var(--ink);
-     text-wrap:pretty}.pane-work .film{margin:0;padding-left:19px;display:grid;gap:7px}.pane-work .film li{font-size:14.5px;line-height:1.5;color:var(--ink-2)}.pane-work .film li b{color:var(--ink);font-weight:660}.pane-work .ct{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);
-    border-radius:3px;overflow:hidden}.pane-work .ct>div{background:var(--card-2);padding:11px 13px;min-width:0}.pane-work .ct p{margin:0;font-size:13.5px;line-height:1.45;color:var(--ink-2)}.pane-work .ct b{color:var(--ink)}.pane-work .ct .c .lab{color:var(--acc)}.pane-work .ct .r .lab{color:var(--go)}.pane-work .watch{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-work .watch .lab{color:var(--acc);margin-bottom:6px}.pane-work .watch ul{margin:0;padding-left:18px;display:grid;gap:6px}.pane-work .watch li{font-size:14px;line-height:1.45;color:var(--ink-2);overflow-wrap:anywhere}.pane-work .watch li b{color:var(--ink)}.pane-work .watch a{color:var(--acc);font-weight:600}.pane-work .steal{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-work .steal .lab{color:var(--acc);margin-bottom:5px}.pane-work .steal p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink);font-weight:560}.pane-work .vbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;
-  padding-bottom:11px;border-bottom:1px solid var(--hair);margin-bottom:2px}.pane-work .vk{font:600 11.5px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;
-  padding:5px 9px;border-radius:3px}.pane-work .vk-shoot{color:#14653F;background:#DFEDE5}.pane-work .vk-rework{color:#8A5A10;background:#F6EBD5}.pane-work .vk-kill{color:#93291F;background:#F6E1DE}.pane-work .vscore{font:800 19px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}.pane-work .vscore small{font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:0}.pane-work .mtags{display:flex;flex-wrap:wrap;gap:5px;margin-left:auto}.pane-work .mtag{font:600 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;
-  color:var(--ink-3);border:1px solid var(--line);border-radius:2px;padding:4px 7px}.pane-work .angle{margin:0;font-size:15px;line-height:1.5;color:var(--ink-2);font-style:italic}.pane-work .alts p, .pane-work .game p, .pane-work .mid p, .pane-work .receipt p, .pane-work .payoff p, .pane-work .engage p, .pane-work .cta p, .pane-work .promise p, .pane-work .howfilm{
-  margin:0;font-size:15.5px;line-height:1.5}.pane-work .alts p{font-weight:560}.pane-work .game{border-left:3px solid var(--acc);padding:2px 0 2px 12px}.pane-work .game p{font-weight:600}.pane-work .howfilm{margin:5px 0 9px !important;font-size:15px;color:var(--ink-2);font-style:italic}.pane-work .hist{border-left:3px solid var(--line);padding:2px 0 2px 12px}.pane-work .hist p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-3)}.pane-work .beats{margin:5px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:5px}.pane-work .beats li{font-size:15px;line-height:1.45}.pane-work .receipt p{font-weight:560}.pane-work .cta{border:1px solid var(--acc-line);background:var(--acc-bg);border-radius:3px;padding:11px 14px}.pane-work .cta .lab{color:var(--acc);margin-bottom:5px}.pane-work .cta p{font-weight:600}.pane-work .promise p{font-size:14px;color:var(--ink-2)}.pane-work .ev{font:800 19px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums;
-  color:var(--go)}.pane-work .ev small{display:block;font:600 9px/1 var(--mono);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-3);margin-top:3px}.pane-work .ev-m{color:var(--acc)}.pane-work .evwhy{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:var(--ink-3);max-width:70ch}.pane-work .pillar{font:700 10px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;
-  color:var(--acc);margin-bottom:9px}.pane-work .risk{margin:10px 0 0;padding:9px 12px;border-left:3px solid var(--dead);
-  background:var(--dead-bg);font-size:14px;line-height:1.5;color:var(--ink-2)}.pane-work .risk b{color:var(--dead);font-weight:700;margin-right:6px}.pane-work .sbreak{margin:2px 0 0;font:500 11px/1.6 var(--mono);color:var(--ink-3);
-  padding-top:9px;border-top:1px solid var(--hair)}.pane-work .say{border:1px solid var(--go);background:var(--go-bg);border-radius:3px;padding:13px 15px}.pane-work .say .lab{color:var(--go)}.pane-work .say p{margin:0 0 9px;font-size:15.5px;line-height:1.5;color:var(--ink);font-weight:560}.pane-work .say p:last-child{margin-bottom:0}.pane-work .qs{border:1px solid var(--wk);background:var(--wk-bg);border-radius:3px;padding:11px 14px;display:grid;gap:7px}.pane-work .qs .lab{color:var(--wk);margin-bottom:0}.pane-work .qs p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2)}.pane-work .qs p b{color:var(--ink)}.pane-work .note{font-size:13px;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--rule-2);padding-left:11px;margin:0}.pane-work .note b{color:var(--ink-2);font-weight:650}.pane-work .note.kill{border-left-color:var(--dead)}.pane-work .note.kill b{color:var(--dead)}.pane-work details.fold{border:1px solid var(--rule);border-left:4px solid var(--ed);border-radius:4px;
-  background:var(--card);margin-top:34px;box-shadow:var(--shadow)}.pane-work details.fold>summary{cursor:pointer;list-style:none;padding:15px 18px;display:flex;
-  align-items:center;gap:14px;flex-wrap:wrap}.pane-work details.fold>summary::-webkit-details-marker{display:none}.pane-work details.fold>summary::before{content:"▸";color:var(--ed);font-weight:700;font-size:15px}.pane-work details.fold[open]>summary::before{content:"▾"}.pane-work .fh{font:700 13px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}.pane-work .fn{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ed);
-    background:var(--ed-bg);border:1px solid var(--ed);border-radius:2px;padding:4px 8px;margin-left:auto}.pane-work .foldb{padding:0 18px 18px}.pane-work .foldb .sdeck{margin-top:0}.pane-work footer{margin:54px 0 90px;padding-top:22px;border-top:1px solid var(--rule);font-size:13.5px;
-       color:var(--ink-3);line-height:1.6}.pane-work footer b{color:var(--ink-2)}.pane-work footer ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
-@media (max-width:760px){.ct{grid-template-columns:1fr}.pane-work .card{grid-template-columns:40px 1fr}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}.pane-work #p-shoot .gst{max-width:1240px;margin:0 auto 34px;padding:0 24px}.pane-work #p-shoot .gst-in{border:2px solid var(--ink);background:var(--bg);padding:22px 26px 20px}.pane-work #p-shoot .gst-kick{margin:0 0 10px;font-family:var(--mono);font-size:11px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:#C8462F}.pane-work #p-shoot .gst-hook{margin:0 0 6px;font-size:clamp(21px,3.4vw,32px);line-height:1.25;
-  letter-spacing:-.025em;font-weight:800}.pane-work #p-shoot .gst-say{margin:0 0 20px;font-size:12.5px;color:var(--ink3);
-  font-family:var(--mono);letter-spacing:.02em}.pane-work #p-shoot .gst-alt{border-left:3px solid #C8462F;padding:3px 0 3px 13px;margin:0 0 18px}.pane-work #p-shoot .gst-alt p{margin:0 0 4px;font-size:16px;line-height:1.35;font-weight:700}.pane-work #p-shoot .gst-altnote{font-size:11.5px;color:var(--ink3)}.pane-work #p-shoot .gst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px 26px;padding-top:17px;border-top:1px solid var(--line)}.pane-work #p-shoot .gst-lab{display:block;font-family:var(--mono);font-size:9.5px;font-weight:800;
-  letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}.pane-work #p-shoot .gst-f p{margin:0;font-size:14px;line-height:1.5}.pane-work #p-shoot .gst-f ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:5px}.pane-work #p-shoot .gst-f li{font-size:14px;line-height:1.5}.pane-work #p-shoot .gst-foot{margin:18px 0 0;padding-top:13px;border-top:1px solid var(--line);
-  font-size:12px;color:var(--ink3)}.pane-work #p-shoot .rcwrap{max-width:1240px;margin:0 auto 40px;padding:0 24px}.pane-work #p-shoot .rc-head{border-left:5px solid #C8462F;padding:2px 0 2px 15px;margin:0 0 20px}.pane-work #p-shoot .rc-head h2{margin:0 0 7px;font-size:clamp(19px,2.8vw,26px);letter-spacing:-.02em}.pane-work #p-shoot .rc-head p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink3);max-width:82ch}.pane-work #p-shoot .rc{display:flex;gap:0;border:1px solid var(--line);background:var(--bg);margin:0 0 16px}.pane-work #p-shoot .rc-rail{flex:0 0 92px;border-right:1px solid var(--line);padding:15px 12px;
-  display:flex;flex-direction:column;gap:6px;background:var(--hair)}.pane-work #p-shoot .rc-n{font-family:var(--mono);font-size:16px;font-weight:800}.pane-work #p-shoot .rc-railtxt{font-family:var(--mono);font-size:9.5px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);line-height:1.3}.pane-work #p-shoot .rc-body{flex:1;min-width:0;padding:16px 20px 18px}.pane-work #p-shoot .rc-pillar{font-family:var(--mono);font-size:10px;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:#C8462F;margin-bottom:6px}.pane-work #p-shoot .rc-t{margin:0 0 9px;font-size:16.5px;line-height:1.35;font-weight:700}.pane-work #p-shoot .rc-t a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}.pane-work #p-shoot .rc-t a:hover{color:#C8462F;border-color:#C8462F}.pane-work #p-shoot .rc-t a::before{content:"\25B6 ";font-size:9px;color:#C8462F;vertical-align:1px}.pane-work #p-shoot .rc-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;
-  padding:9px 0 11px;border-bottom:1px solid var(--hair);margin-bottom:12px}.pane-work #p-shoot .rc-miss{font-size:18px;font-weight:800;color:#C8462F;white-space:nowrap}.pane-work #p-shoot .rc-miss small{display:block;font-size:9px;font-weight:700;letter-spacing:.04em;
-  text-transform:uppercase;color:var(--ink3);margin-top:2px}.pane-work #p-shoot .rc-meta{font-size:11.5px;color:var(--ink3);line-height:1.5}.pane-work #p-shoot .rc-lab{display:block;font-family:var(--mono);font-size:9.5px;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}.pane-work #p-shoot .rc-leak{margin:0 0 13px;font-size:13.5px;line-height:1.55;color:var(--ink3)}.pane-work #p-shoot .rc-pick{border-left:3px solid #C8462F;padding:2px 0 2px 13px;margin:0 0 14px}.pane-work #p-shoot .rc-do{margin:0;font-size:15.5px;line-height:1.5;font-weight:600}.pane-work #p-shoot .rc-why{margin:6px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink3)}.pane-work #p-shoot .rc-alt{margin:0 0 13px}.pane-work #p-shoot .rc-alt ul{margin:0;padding-left:19px;display:flex;flex-direction:column;gap:6px}.pane-work #p-shoot .rc-alt li{font-size:13.5px;line-height:1.5;color:var(--ink3)}.pane-work #p-shoot .rc-kind{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;
-  letter-spacing:.06em;padding:1px 6px;margin-right:7px;border:1px solid var(--line);
-  color:var(--ink3);vertical-align:1px}.pane-work #p-shoot .rc-asset{margin:0 0 12px;font-size:13px;line-height:1.5}.pane-work #p-shoot .rc-say{background:var(--hair);border-left:3px solid var(--ink);padding:11px 14px;margin:0 0 11px}.pane-work #p-shoot .rc-say p{margin:0;font-size:14.5px;line-height:1.55;font-style:italic}.pane-work #p-shoot .rc-ed{margin:0;font-size:11.5px;color:var(--ink3)}
-@media(max-width:640px){#p-shoot .rc{flex-direction:column}.pane-work #p-shoot .rc-rail{flex-direction:row;align-items:center;border-right:0;
-    border-bottom:1px solid var(--line);flex:0 0 auto}}
+@media(max-width:620px){.top{padding:28px 18px 0} .tabs{padding:0 18px;gap:20px}}
+.pane-shoot .next-shoots{max-width:1000px;margin:0 auto;padding:0 24px 80px}.pane-shoot .ns-head{display:flex;justify-content:space-between;gap:26px;align-items:flex-start;
+  padding:2px 0 24px;border-bottom:1px solid var(--line)}.pane-shoot .ns-kick{margin:0 0 7px;font:800 11px var(--mono);letter-spacing:.14em;
+  text-transform:uppercase;color:#C8462F}.pane-shoot .ns-head h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px);line-height:1.02;letter-spacing:-.045em}.pane-shoot .ns-head p{margin:0;max-width:620px;color:var(--ink3);font-size:15px;line-height:1.55}.pane-shoot .ns-head a{flex:0 0 auto;border:1px solid var(--ink);padding:11px 14px;color:var(--ink);
+  text-decoration:none;font-size:13px;font-weight:800}.pane-shoot .ns-rule{margin:18px 0 24px;padding:13px 15px;border-left:3px solid #C8462F;
+  background:var(--hair);font-size:13.5px;line-height:1.5}.pane-shoot .ns-list{display:grid;gap:18px}.pane-shoot .ns-card{display:grid;grid-template-columns:92px 1fr;border:1px solid var(--line);background:var(--bg)}.pane-shoot .ns-rail{padding:20px 15px;background:var(--hair);border-right:1px solid var(--line);text-align:right}.pane-shoot .ns-num{display:block;font:800 12px var(--mono);color:var(--ink3)}.pane-shoot .ns-score{display:block;margin-top:7px;font-size:30px;font-weight:850;letter-spacing:-.05em}.pane-shoot .ns-score:after{content:'/100';display:block;font:700 9px var(--mono);letter-spacing:.03em;color:var(--ink3)}.pane-shoot .ns-body{padding:20px 22px 18px}.pane-shoot .ns-top{display:flex;gap:8px;margin-bottom:8px}.pane-shoot .ns-status{font:800 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:#C8462F;background:color-mix(in srgb,#C8462F 10%,transparent);padding:4px 7px}.pane-shoot .ns-body h2{margin:0 0 5px;font-size:clamp(20px,3vw,27px);letter-spacing:-.025em}.pane-shoot .ns-why{margin:0 0 15px;color:var(--ink3);font-size:13.5px;line-height:1.5}.pane-shoot .ns-hook{border-left:3px solid var(--ink);padding:3px 0 3px 13px;margin:0 0 18px}.pane-shoot .ns-hook span, .pane-shoot .ns-lab{display:block;margin-bottom:5px;font:800 9.5px var(--mono);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}.pane-shoot .ns-hook p{margin:0;font-size:18px;line-height:1.4;font-weight:750}.pane-shoot .ns-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;border-top:1px solid var(--line);padding-top:15px}.pane-shoot .ns-grid p, .pane-shoot .ns-grid ul{margin:0;font-size:13.5px;line-height:1.5}.pane-shoot .ns-grid ul{padding-left:18px}.pane-shoot .ns-grid li+li{margin-top:5px}.pane-shoot .ns-prep, .pane-shoot .ns-risk{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);
+  font-size:12.5px;line-height:1.5;color:var(--ink3)}.pane-shoot .ns-risk{margin-top:7px;padding-top:0;border-top:0}
+@media(max-width:680px){.ns-head{flex-direction:column}.pane-shoot .ns-head a{width:100%;text-align:center}.pane-shoot .ns-card{grid-template-columns:58px 1fr}.pane-shoot .ns-rail{padding:18px 8px}.pane-shoot .ns-score{font-size:22px}.pane-shoot .ns-grid{grid-template-columns:1fr}.pane-shoot .ns-body{padding:18px 16px}.pane-shoot .next-shoots{padding:0 18px 60px}}
 
 .pane-res{
   --ground:#FBFBF8; --panel:#FFFFFF; --sunk:#F1F2ED; --rule:#E2E4DF; --rule-soft:#EFF0EC;
@@ -348,7 +184,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <div class="top">
   <h1>The Board</h1>
   <span class="when"><b id="today">12 September 2026</b>
-    <span class="built" id="built" data-utc="2026-09-12T20:38:06.716553+00:00">built 4:38pm</span></span>
+    <span class="built" id="built" data-utc="2026-09-12T20:44:29.817232+00:00">built 4:44pm</span></span>
 </div>
 
 <style>
@@ -402,16 +238,9 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <!-- RESULTS OPENS FIRST (2026-08-17, his call): "the What to Shoot board is not
      really working so I'm working on that still... I want to start on the Results
      tab." Both tabs stay; only the order and which one is open changed. -->
-<!-- 🗂 THIRD TAB, 2026-09-01. Brixton, on both the hold panel and the blocks
-     that had been folded at the bottom of Results: "let's just make that a
-     separate tab next to What to shoot as a working section… that section is
-     not really cutting it right now for me." So work-in-progress gets its own
-     room instead of competing with the two tabs he actually uses. Nothing is
-     deleted — it is one click away and still rebuilt every morning. -->
 <nav class="tabs" role="tablist">
   <button class="tab on" role="tab" aria-selected="true" data-p="res">Insights</button>
   <button class="tab" role="tab" aria-selected="false" data-p="shoot">Shoot</button>
-  <button class="tab tab-work" role="tab" aria-selected="false" data-p="work">Working ideas</button>
 </nav>
 
 <div class="pane on pane-res" id="p-res" role="tabpanel"><div class="wrap"><style>.rdash .wrap{max-width:1240px;margin:0 auto;padding:36px 22px 90px;display:flex;flex-direction:column;gap:34px}
@@ -1491,533 +1320,72 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
 .ns-l a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
 .ns-m{display:block;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:1px}
 </style><span class="anch" id="s-ngs"></span><section class="ns"><div class="ns-head"><p class="ns-h">🚫 Never got shown &mdash; 106 clips under 3,000 reach</p><p class="ns-v">Your clips that travel are held <b>23s</b>. These are held <b>12s</b>. Instagram does not push what people do not watch, so this is the opening failing &mdash; not the algorithm and not the idea. <b>40 of these 106 show real signs of life.</b> The rest were watched by nobody for long enough to judge, and are not worth re-opening.</p><p class="ns-caveat">⚠️ No clip in this data carries a length, so a short clip posts a lower hold time automatically. Some of that gap is length, not quality &mdash; treat hold as a strong hint, not a verdict.</p></div><div class="ns-b ns-keep"><p class="ns-bt">Re-post these <span class="ns-n">10</span></p><p class="ns-rule">Held longer than three-quarters of your ignored clips <b>and</b> people saved or sent them. The clip did its job; it just never got shown.</p><p class="ns-do"><span class="ns-lab">Change this</span>Nothing inside the clip. Give it a <b>new first line</b> and post it again &mdash; or put it out as a collab so it borrows an audience. Re-posting the same opening to the same cold feed gets the same result.</p><ul class="ns-l"><li><a href="https://www.instagram.com/reel/Daa95e3NUyh/" target="_blank" rel="noopener">The world’s most foregiving lie.  I hit this off the cart path</a><span class="ns-m">2,310 reach &middot; 27s held &middot; 18 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DaV-IRSPA6p/" target="_blank" rel="noopener">‘Humming’ during your swing is the number one trending swing h</a><span class="ns-m">1,915 reach &middot; 25s held &middot; 34 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DaviaR8tT7H/" target="_blank" rel="noopener">If you can make a steady hum you will stripe it. Watch the DOD</a><span class="ns-m">2,202 reach &middot; 21s held &middot; 42 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DcpDOz9vrPb/" target="_blank" rel="noopener">I saw this guy hit a huge slice.  So I ran an experiment on hi</a><span class="ns-m">1,842 reach &middot; 20s held &middot; 11 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DdFFcwoq7F5/" target="_blank" rel="noopener">One of the best coaches in golf just told me to hum.  Tension </a><span class="ns-m">2,155 reach &middot; 20s held &middot; 7 saves+shares</span></li></ul></div><div class="ns-b ns-cut"><p class="ns-bt">Cut the front off these <span class="ns-n">13</span></p><p class="ns-rule">People saved or sent them, but they were held for less time than the clips above &mdash; the payoff lands, the opening loses them first.</p><p class="ns-do"><span class="ns-lab">Change this</span><b>Delete everything before the payoff.</b> Whatever made people save it becomes frame one &mdash; the result, the number, the reaction. No walk-in, no setup, no hello.</p><ul class="ns-l"><li><a href="https://www.instagram.com/reel/DbyC3cxNcOl/" target="_blank" rel="noopener">I learned my best swing drill from a golfer who can’t see the </a><span class="ns-m">2,225 reach &middot; 16s held &middot; 14 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DbN_UCltXRf/" target="_blank" rel="noopener">Practice hitting balls blind folded and humming. It removes al</a><span class="ns-m">1,318 reach &middot; 16s held &middot; 17 saves+shares</span></li><li><a href="https://www.instagram.com/reel/Dc7N0aItS9t/" target="_blank" rel="noopener">He thought I was crazy… until he tried it.  If you can keep yo</a><span class="ns-m">2,719 reach &middot; 16s held &middot; 18 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DbymgTdNIdc/" target="_blank" rel="noopener">Love @edreedhof20  breakdown on why there is NO GOAT.</a><span class="ns-m">1,835 reach &middot; 15s held &middot; 9 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DcO0ewUNb2W/" target="_blank" rel="noopener">Watch how this 17 handicap went from hitting it terrible to st</a><span class="ns-m">1,491 reach &middot; 14s held &middot; 6 saves+shares</span></li></ul></div><div class="ns-b ns-add"><p class="ns-bt">Give these a reason to keep <span class="ns-n">17</span></p><p class="ns-rule">Held well &mdash; people watched. But almost nobody saved or sent them, so there was nothing in it worth keeping or forwarding.</p><p class="ns-do"><span class="ns-lab">Change this</span>Put <b>something on screen worth screenshotting</b>: a number, a score, a before/after. A clip people watch and do not save is a clip Instagram stops showing.</p><ul class="ns-l"><li><a href="https://www.instagram.com/reel/Dbs2VQvtb2y/" target="_blank" rel="noopener">I played with the world’s best blind golfer. And experienced w</a><span class="ns-m">2,155 reach &middot; 26s held &middot; 1 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DdKPdWpKY2P/" target="_blank" rel="noopener">The world’s best blind golfer taught me something I couldn’t s</a><span class="ns-m">2,738 reach &middot; 26s held &middot; 0 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DbyERY-NkW0/" target="_blank" rel="noopener">You can’t worry about what you can’t see. Take away your tensi</a><span class="ns-m">1,512 reach &middot; 22s held &middot; 0 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DcI8p5BqtCp/" target="_blank" rel="noopener">Turns out I might be better when I can’t see the ball.  First </a><span class="ns-m">1,875 reach &middot; 22s held &middot; 0 saves+shares</span></li><li><a href="https://www.instagram.com/reel/DbWYxChvOd8/" target="_blank" rel="noopener">Gotta post the L’s also</a><span class="ns-m">2,039 reach &middot; 22s held &middot; 0 saves+shares</span></li></ul></div></section></div></details></div>
-<div class="pane pane-shoot" id="p-shoot" role="tabpanel"><div class="wrap"><meta charset="utf-8">
-
-
-
-<header>
-<div class="wrap mast">
-  <span class="eyebrow">The Board · rebuilt 10 Aug 2026 · go shoot</span>
-  <h1>Eight things to shoot.<br>Read the card, <em>go film it</em>.</h1>
-  <p class="deck">Every card is <b>a hook you read word for word</b>, <b>three bullets on how to shoot it</b>, and
-  <b>one line each on what makes it convert and what makes it travel</b> — so you know what the shot is for while
-  you're standing there. Nothing else. <b>Four are golf, four aren't</b>, which is John's rule, not mine.</p>
-
-  <div class="rules">
-    <span class="lab">The four that apply to every card</span>
-    <ul>
-      <li><b>Frame one is never your face.</b> It's the object, the number, or the other person.</li>
-      <li><b>Roll before you know the answer.</b> If you already know how it ends, your face knows too.</li>
-      <li><b>Report it, never prescribe it.</b> Last line is what <i>you</i> learned, past tense — never "you should."</li>
-      <li><b>One phone, no operator.</b> Back camera for the thing, then flip to the front camera for the reaction.</li>
-    </ul>
-  </div>
-</div>
-<div class="bar wrap" role="group" aria-label="Filter">
-  <button data-f="all" aria-pressed="true">Everything</button>
-  <button data-f="GO" aria-pressed="false">Go shoot</button>
-  <button data-f="WK" aria-pressed="false">Working ideas</button>
-  <button data-f="PP" aria-pressed="false">People bank</button>
-  <button data-f="ED" aria-pressed="false">Mick — no camera</button>
-  <span class="count" id="count"></span>
-</div>
-</header>
-
-
-<section class="gst">
-  <div class="gst-in">
-    <p class="gst-kick">&#127916; Go shoot this &mdash; today</p>
-    <h2 class="gst-hook">&ldquo;I shot 65 with five clubs without thinking about my swing. So I played the same nine thinking about nothing but my swing. Here's what I shot.&rdquo;</h2>
-    <p class="gst-say">Say it word for word. It is the first thing out of your mouth.</p>
-    <div class="gst-alt"><span class="gst-lab">Shoot this opening too &mdash; works cold</span><p>&ldquo;Same nine. Same five clubs. This time, every swing thought stays in my head.&rdquo;</p><span class="gst-altnote">Same take, both openings. Decide in the edit, never on the range.</span></div>
-
-    <div class="gst-grid">
-      <div class="gst-f"><span class="gst-lab">Film it</span>
-        <ul><li>Roll every shot, say every swing thought out loud, and keep the live score visible.</li><li>Same nine, same five clubs, one variable</li><li>Say the mechanics before every shot</li></ul></div>
-      <div class="gst-f"><span class="gst-lab">The instrument</span>
-        <p>Does thinking through every mechanic beat 65—or blow up the score?</p></div>
-      <div class="gst-f"><span class="gst-lab">Why they share it</span>
-        <p>Every golfer knows the one friend who turns a swing into a twelve-step checklist.</p></div>
-      <div class="gst-f"><span class="gst-lab">Why they follow</span>
-        <p>Next I’m testing whether one swing cue helps—or whether zero still wins.</p></div>
+<div class="pane pane-shoot" id="p-shoot" role="tabpanel"><div class="wrap"><section class="next-shoots">
+  <header class="ns-head">
+    <div><p class="ns-kick">Shoot</p><h1>The four ideas worth making</h1>
+      <p>Everything else was merged, parked or removed. Work the list in order; the
+      status tells you the one thing that must be true before the camera rolls.</p></div>
+    <a href="https://docs.google.com/document/d/1BQOHBnOx5QaRBLv14h4pMGHFI7jmogObzuA0SWWQRiY/edit" target="_blank" rel="noopener">Open the working ideas doc &rarr;</a>
+  </header>
+  <p class="ns-rule"><b>The cut:</b> menu-reading, hotel, routing, generic experiment prompts,
+  range logistics and the failed heart-rate concept are off the board.</p>
+  <div class="ns-list"><article class="ns-card">
+  <div class="ns-rail"><span class="ns-num">01</span><span class="ns-score">92</span></div>
+  <div class="ns-body">
+    <div class="ns-top"><span class="ns-status">Highest upside</span></div>
+    <h2>Moat reveal — episode 2</h2>
+    <p class="ns-why">A direct sequel to the strongest converting lane: visible progress, building in public and a live test.</p>
+    <div class="ns-hook"><span>Say this first</span><p>&ldquo;The AI I showed you in July can do something now it couldn’t do then.&rdquo;</p></div>
+    <div class="ns-grid">
+      <div><span class="ns-lab">Film it</span><ul><li>Open on the new result, not your face.</li><li>Show July beside today, then run one real swing.</li><li>Hold on the output and your honest reaction. Keep it under 35 seconds.</li></ul></div>
+      <div><span class="ns-lab">Proof on screen</span><p>The July/current screens and one live output.</p></div>
     </div>
-
-    <p class="gst-foot">Picked because it scores <b>88</b> and you can
-    film it today with no booking. 4 other shootable ideas below &mdash; this is the one to do first.</p>
+    <p class="ns-prep"><b>Before filming:</b> Name the one capability that changed. It must be visible in one second.</p>
+    <p class="ns-risk"><b>Failure mode:</b> If the change is not instantly visible, this turns into a product demo.</p>
   </div>
-</section>
-
-<div class="rcwrap"><div class="rc-head"><h2>&#9986;&#65039; Recut these first &mdash; 6 clips, footage already on a drive</h2><p><b>Written line for line by ChatGPT against your own numbers, rebuilt every morning.</b> Nothing here needs a booking, a location or another person &mdash; every one of these is a clip you already posted and already own the footage for. They sit above the new ideas because your own data put them there: on 22 August two re-cuts took 918 follows while six brand-new clips took 20 between them. Ranked by followers left on the table.</p></div><article class="rc"><div class="rc-rail"><span class="rc-n">R1</span><span class="rc-railtxt">MICK CUT THIS</span></div><div class="rc-body"><div class="rc-pillar">2 · The fix is never where you think</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/DcTl4Axq3ry/" target="_blank" rel="noopener">Mario Tobia, the world’s best BLIND golfer! I gained a new appreciation for the …</a></h3><div class="rc-bar"><span class="rc-miss">+1,332<small>followers on the table</small></span><span class="rc-meta">177,272 reached &middot; 56 followed &middot; <b>0.3</b> per 1,000 &middot; the blind-golfer clips &middot; this format: 7 clips at 0.3 per 1,000</span></div><p class="rc-leak"><b>Why it leaked:</b> The format keeps turning Brixton into the narrator of someone else’s greatness, so viewers admire Mario and leave with no reason to follow Brixton.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys FOLLOWS</span><p class="rc-do">Re-shoot only the final 8 seconds: run Mario’s swing through PG1 first, then film Brixton holding the phone close to camera with PG1’s actual top flaw filling the screen; cut from Mario’s strike directly to that verdict while Brixton delivers the CTA.</p><p class="rc-why">the PG1 screen makes Brixton the source of the answer without gambling the opening that already earned reach.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys REACH</span>Change zero seconds: republish the existing edit as a Collab with Mario so his audience receives it from the golfer they already care about, while the original opening and ending stay intact. (DESK JOB)</li><li><span class="rc-kind">buys FOLLOWS</span>Re-shoot only seconds 6–10 at the end: black out the picture for Mario’s impact, ask “Could you tell he was blind?”, then snap back to Brixton beside the frozen strike and end on “Seeing the ball isn’t the lead domino. Knowing what’s actually wrong is.”</li></ul></div><p class="rc-asset"><b>The instrument:</b> ALREADY EXISTS: PG1</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“Mario can’t see the ball. Most golfers can see it and still fix the wrong thing. Look—this is what PG1 says is actually happening. That’s the lead domino. I’m building an AI that tells you what’s actually wrong with your swing. Follow along—I’ll show you what it finds.”</p></div><p class="rc-ed">Project file should exist — a re-cut is cheap.</p></div></article><article class="rc"><div class="rc-rail"><span class="rc-n">R2</span><span class="rc-railtxt">ASK MICK</span></div><div class="rc-body"><div class="rc-pillar">3 · Feel over force</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/DZ2zGsmtqOL/" target="_blank" rel="noopener">Hollis Stacy — “I shot 64, 72 years old”</a></h3><div class="rc-bar"><span class="rc-miss">+1,306<small>followers on the table</small></span><span class="rc-meta">182,425 reached &middot; 122 followed &middot; <b>0.7</b> per 1,000 &middot; the just-you-talking clips &middot; this format: 64 clips at 3.9 per 1,000</span></div><p class="rc-leak"><b>Why it leaked:</b> The solo-talk format keeps ending with admiration for Hollis instead of giving viewers a useful reason to come back for Brixton.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys FOLLOWS</span><p class="rc-do">Re-shoot only the final 8 seconds: hold the phone beside you with the Hum Meter listening as you hum through one swing; freeze on its steadiness score and the exact point the hum broke, then deliver the CTA.</p><p class="rc-why">the instrument turns Hollis’s achievement into Brixton’s useful insight without risking the opening that already reached 182,425 people.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys REACH</span>Change zero seconds: republish the existing edit as a Collab post with Hollis so her audience supplies a second wave of qualified golfers while the original opening stays intact. (DESK JOB)</li><li><span class="rc-kind">buys FOLLOWS</span>Re-shoot only the final 10 seconds with Hollis and Brixton humming the same three-count rhythm into the Hum Meter; reveal both scores simultaneously, circle hers, and have Brixton promise to keep testing what makes great tempo survive.</li></ul></div><p class="rc-asset"><b>The instrument:</b> ALREADY EXISTS: the Hum Meter</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“Hollis stripes it at 72 because her tempo never gets rushed. That’s the lead domino. I built a Hum Meter that shows you exactly where your hum breaks, because the steadier the hum, the better you strike it. Follow along and I’ll give you access.”</p></div><p class="rc-ed">Did you cut this? If yes it is a cheap re-cut; if not it is a re-shoot.</p></div></article><article class="rc"><div class="rc-rail"><span class="rc-n">R3</span><span class="rc-railtxt">MICK CUT THIS</span></div><div class="rc-body"><div class="rc-pillar">1 · I test it on myself</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/Db8CQXgq1Ku/" target="_blank" rel="noopener">TRUST ME… watch til the end. I love to bet on the golf course, but this just WAS…</a></h3><div class="rc-bar"><span class="rc-miss">+565<small>followers on the table</small></span><span class="rc-meta">75,063 reached &middot; 23 followed &middot; <b>0.3</b> per 1,000 &middot; the betting clips</span></div><p class="rc-leak"><b>Why it leaked:</b> The ending resolves the bet but gives viewers no Brixton insight worth coming back for.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys FOLLOWS</span><p class="rc-do">Re-shoot only the final 8 seconds: hard-cut from the existing reveal to Brixton holding the scorecard, with the final score and exact amount settled large on screen; he circles the one decisive hole, delivers the lesson, and ends there.</p><p class="rc-why">the exact score and decisive hole turn an entertaining bet into Brixton’s repeatable way of thinking.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys REACH</span>Change zero seconds: republish the existing edit with the caption, “Every foursome has one guy who turns a friendly round into a contract negotiation,” so viewers immediately send it to that specific golfer. (DESK JOB)</li><li><span class="rc-kind">buys FOLLOWS</span>Re-shoot only the final 10 seconds with the other bettor settling the wager on camera, then asking, “Would you make that bet again?” Brixton looks at the scorecard—not him—and answers with the lesson.</li></ul></div><p class="rc-asset"><b>The instrument:</b> NONE</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“The money wasn’t the point. One hole decided the whole thing. Pressure doesn’t build your game. It exposes it.”</p></div><p class="rc-ed">Project file should exist — a re-cut is cheap.</p></div></article><article class="rc"><div class="rc-rail"><span class="rc-n">R4</span><span class="rc-railtxt">MICK CUT THIS</span></div><div class="rc-body"><div class="rc-pillar">3 · Feel over force</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/DcI8iVpqydE/" target="_blank" rel="noopener">One weird tip and a 17 handicap striped it: hum through the entire swing.  He lo…</a></h3><div class="rc-bar"><span class="rc-miss">+496<small>followers on the table</small></span><span class="rc-meta">86,786 reached &middot; 184 followed &middot; <b>2.1</b> per 1,000 &middot; the humming clips &middot; this format: 44 clips at 2.2 per 1,000</span></div><p class="rc-leak"><b>Why it leaked:</b> Across 44 humming clips, the format keeps giving away the trick without giving viewers a reason to follow Brixton; this ending never turned the striped shot into a Hum Meter result.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys FOLLOWS</span><p class="rc-do">Re-shoot only the final 8 seconds: hold the Hum Meter screen beside the golfer, show his actual score and the exact point his hum broke, then point to that break as the ball strike replays.</p><p class="rc-why">it preserves the opening and makes the Hum Meter deliver a visible answer instead of another spoken tip.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys REACH</span>Change zero seconds: republish the existing edit as a Collab post with the 17-handicap golfer so the proven opening reaches his audience too. (DESK JOB)</li><li><span class="rc-kind">buys FOLLOWS</span>Re-shoot only the final 10 seconds: mic the golfer’s throat and show the Hum Meter trace moving live while he swings; freeze the trace at impact, reveal the score, then replay the strike beside it.</li></ul></div><p class="rc-asset"><b>The instrument:</b> ALREADY EXISTS: the Hum Meter</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“His hum scored [actual score]. It broke right here—right before impact. The steadier the hum, the more you stripe it. I’m building the Hum Meter so you can perfect yours. Follow along and I’ll give you access.”</p></div><p class="rc-ed">Project file should exist — a re-cut is cheap.</p></div></article><article class="rc"><div class="rc-rail"><span class="rc-n">R5</span><span class="rc-railtxt">MICK CUT THIS</span></div><div class="rc-body"><div class="rc-pillar">1 · I test it on myself</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/DcLNK74KnSQ/" target="_blank" rel="noopener">Can YOU make a full swing and hit the ball under 10 feet?  This is a great way t…</a></h3><div class="rc-bar"><span class="rc-miss">+146<small>followers on the table</small></span><span class="rc-meta">18,975 reached &middot; 3 followed &middot; <b>0.2</b> per 1,000 &middot; the swing-tip clips &middot; this format: 13 clips at 0.7 per 1,000</span></div><p class="rc-leak"><b>Why it leaked:</b> This swing-tip format keeps delivering a complete standalone drill with no Brixton-owned reason to return; here, the ending never measures the “under 10 feet” promise or opens the next loop.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys FOLLOWS</span><p class="rc-do">Re-shoot only the final 8 seconds: freeze on the ball flight, show the launch monitor’s actual peak-height number full-screen, then hold a phone beside it with PG1 displaying its real top swing verdict; leave everything before those final 8 seconds unchanged.</p><p class="rc-why">the height number completes the challenge, and the visible PG1 verdict gives viewers a reason to stay with Brixton.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys FOLLOWS</span>Re-shoot only the final 8 seconds as a two-ball comparison: first hit one above 10 feet, then one below it, with both launch-monitor heights visible; finish by naming the single swing difference that changed the window.</li><li><span class="rc-kind">buys REACH</span>Change zero seconds: republish the existing cut as a Collab post with the Performance Golf account so the proven opening reaches its audience too; do not alter the edit. (DESK JOB)</li></ul></div><p class="rc-asset"><b>The instrument:</b> ALREADY EXISTS: PG1</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“Nine feet, two inches. Full swing. That’s the test. If yours climbs, don’t start changing five things. Find the lead domino. I’m building an AI that tells you what’s actually wrong with your swing. Follow along—I’ll show you what it finds.”</p></div><p class="rc-ed">Project file should exist — a re-cut is cheap.</p></div></article><article class="rc"><div class="rc-rail"><span class="rc-n">R6</span><span class="rc-railtxt">MICK CUT THIS</span></div><div class="rc-body"><div class="rc-pillar">1 · I test it on myself</div><h3 class="rc-t"><a href="https://www.instagram.com/reel/DaRTXW3NXJr/" target="_blank" rel="noopener">What does a scratch golfer shoot in 20mph+ winds? 9 holes in 90 seconds.</a></h3><div class="rc-bar"><span class="rc-miss">+0<small>followers on the table</small></span><span class="rc-meta">5,964 reached &middot; 26 followed &middot; <b>4.4</b> per 1,000 &middot; the just-you-talking clips &middot; this format: 63 clips at 3.9 per 1,000</span></div><p class="rc-leak"><b>Why it leaked:</b> This solo format is wildly inconsistent at earning distribution, and the opening gave strangers no human conflict worth sending to a golfing friend.</p><div class="rc-pick"><span class="rc-lab">① Do this one &middot; buys BOTH</span><p class="rc-do">Re-shoot only seconds 0–3 at the first tee: frame one is the flag bent hard in the wind with a random golfer beside Brixton saying, “No chance a scratch golfer shoots even par in this”; Brixton answers, “Count every shot.” Cut directly into the original second 3 and leave the original ending untouched.</p><p class="rc-why">the stranger creates an immediate argument golfers will send to the friend who always blames the wind.</p></div><div class="rc-alt"><span class="rc-lab">Two other ways to cut it</span><ul><li><span class="rc-kind">buys REACH</span>Replace only seconds 0–3 using footage already in the timeline: open on the ugliest wind-affected shot, freeze the ball in flight, and burn in “SCRATCH GOLFER · 20+ MPH · GUESS THE SCORE”; then run the existing clip and ending unchanged. (DESK JOB)</li><li><span class="rc-kind">buys REACH</span>Re-shoot only seconds 0–3 with nine balls lined up on the tee like a scoreboard; Brixton knocks them away one by one and says, “Nine holes. Twenty-mile-an-hour wind. Every shot counts.” Cut to the untouched original round before the third second.</li></ul></div><p class="rc-asset"><b>The instrument:</b> NONE</p><div class="rc-say"><span class="rc-lab">🎙 Say this &mdash; word for word</span><p>“No chance a scratch golfer shoots even par in this.” “Count every shot.”</p></div><p class="rc-ed">Project file should exist — a re-cut is cheap.</p></div></article></div>
-
-<main class="wrap" id="main"></main>
-
-<footer class="wrap">
-  <b>Changed 10 Aug, on your notes</b>
-  <ul>
-    <li><b>Five swing-scan cards became one.</b> You said you can't have them all be scans — card 2 is the only one left.</li>
-    <li><b>The counter card is gone as a card.</b> It was analysis, not a shoot. It survives as one bullet inside cards you're already filming.</li>
-    <li><b>"Two strangers, scores side by side" is parked</b> — you called it and you're right: it needs two willing people for one payoff.</li>
-    <li><b>Four non-golf cards added</b> off John Hardesty's pillars — business, adversity, time, going to the source.</li>
-    <li><b>The broken arm moved out of Mick's queue and onto yours.</b> Your call: it's you, not an edit.</li>
-    <li><b>The swing-grind / handicap card is deleted</b> as its own card — it came back as the receipt inside card 4.</li>
-    <li><b>Mick's queue went 7 → 4.</b> Cut on your call: the Carter/Donnie review (you're re-filming the scans instead) · the celebrity meets (they won't ship a collab, so the reach case dies) · the hole-17 hum re-edit. Never added: Peña/Utley and the NBC clip.</li>
-    <li><b>The 5-club payoff is now yours, not mine</b> — five clubs stops you thinking about mechanics. Card 4 is the control round that turns it from a story into a finding.</li>
-  </ul>
-  <p style="margin-top:14px"><b>Deliberately not here:</b> the blindfold / blind-golfer arc (9 clips, ~0.4/1k — closed) ·
-  heart rate on the watch (two reels, both failed — parked until a device exists that shows a big legible number with no cut) ·
-  link-in-bio asks (0 follows off 2,859 reach) · "comment below" (engagement bait suppresses non-follower reach) ·
-  giveaway or prize hooks (Instagram makes them ineligible for recommendation).</p>
-</footer><script>const SHOOTPANE=document.getElementById('p-shoot');
-const CARDS = [
-{sec:"new", ez:"GO", rail:"New today", n:"N1", t:"Three Balls or I Pay", pillar:"1 · I test it on myself", game:"A random range golfer gets three swings to add 10 mph after Brixton’s experiment; he either clears the target and wins $100 or does not.", hook:"I bet a stranger $100 I could add ten miles per hour in three balls.", hook2:"Three balls. Ten miles per hour. If he gets it, I pay.", howfilm:"At a public range, a friend holds the iPhone vertically for one continuous 40-second sequence with Brixton and the stranger.", receipt:"Launch monitor BALL SPEED changes after every shot, with the baseline and final reading held full-screen || THE COUNT at ?mode=count&label=MPH%20GAIN&target=10 moves as Brixton taps in each verified mph gained || THE COUNT at ?mode=count&label=BALLS%20USED&target=3 moves from 0 to 3 while the launch-monitor target remains the bet", cta:"Follow—I run one real-golfer experiment every day.", risk:"The bet feels manufactured if Brixton chooses a golfer who already swings near his physical limit.", beats:["[BASELINE BALL SPEED] as the stranger hits while humming","PG1 names his single flaw","Brixton gives one feel and starts [THREE BALLS]","each humming attempt updates the number","freeze on [FINAL BALL SPEED] before the stranger’s reaction."], ev:"214", ev90:"4023", evwhy:"MARRIED — hum reach (16,787 typical) with an app-grade ending (12.77/1k). The only combination on this board that clears the pace.", married:"1"},
-{sec:"new", ez:"GO", rail:"New today", n:"N2", t:"Buying Ten Minutes of Life", pillar:"4 · Go to the source", game:"Brixton raises a cash offer until a stranger agrees to abandon ten minutes of range practice, and the stranger alone determines whether time has a price.", hook:"I kept raising this number until a stranger sold me ten minutes of his life.", hook2:"He called his time priceless. The offer was still under $100.", howfilm:"At a busy range, a friend holds the iPhone for a 45-second edit plus a locked-off ten-minute timelapse after the stranger accepts.", receipt:"THE COUNT at ?mode=money&target=100 moves from $0 to the stranger’s uncontrolled stop price || The stopwatch moves from 10:00 to 0 after the deal, proving the full ten minutes were surrendered || THE COUNT at ?mode=vote&a=KEEP&b=TAKE moves its TAKE percentage as nearby golfers vote before the stranger decides", cta:"Follow—I’m testing the five traps on real people.", risk:"It reads as paying someone to do nothing unless the abandoned practice session and full ten-minute sacrifice stay visibly central.", beats:["Open on [TEN MINUTES] and a stranger actively practicing","raise the live offer while he repeatedly refuses","freeze THE COUNT when he accepts or it reaches $100","start the stopwatch and film the full surrendered ten minutes","reveal [HIS PRICE] and ask what made him stop."], ev:"27", ev90:"34", evwhy:"NEW LANE — UNPROVEN on this account, so this EV is a bet, not a projection. The case for it: his own saves show mindset/business posts out-engaging golf instruction ~250x, and he owns the material. Ceiling is the argument, not history."},
-{sec:"new", ez:"GO", rail:"New today", n:"N3", t:"Five MPH for $100", pillar:"1 · I test it on myself", game:"A stranger sets Brixton’s target five MPH above his three-shot average, and five humming swings decide who keeps $100.", hook:"A stranger bet $100 I couldn’t add five miles per hour in five balls.", hook2:"Five balls. One hundred dollars. My baseline had to fall.", howfilm:"At the range, one friend films vertically for 20 minutes while the stranger sets the target and Brixton’s phone runs the Hum Meter.", receipt:"Launch monitor BALL SPEED updates after every shot until it reaches [BASELINE + 5] || THE COUNT in count mode shows MPH GAIN moving from 0 toward 5 as verified speeds land || HUM METER steadiness score moves from the baseline swing to each attempt, revealing whether reduced tension produced the gain", cta:"Follow—I put my own game on trial every week.", risk:"A suspiciously weak baseline makes the audience assume the challenge was sandbagged.", beats:["Average three cold swings [BASELINE]","stranger adds five and holds the $100","Brixton alternates humming swings with launch-monitor close-ups","[ATTEMPT 1–5] escalates toward the target","reveal the final speed and hand over the cash if he loses."], ev:"90", ev90:"1685", evwhy:"hum reach x guest ending — 5.35/1k on 16,787 typical reach."},
-
-
-
-/* ═══════════ GO SHOOT ═══════════ */,
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"1", hist:"20 clips in this format — 2,734,737 reach, 4163 follows, 1.52 per 1,000. this format has produced his biggest clips — the best one took 1,784 follows — but it is wildly inconsistent, and most attempts convert far below it.", score:"85", sbreak:"Stop 18/20 · Watch 14/15 · Sends 14/15 · Value 13/15 · Proof 8/10 · Comments 6/10 · Follow 7/10 · Ease 5/5", beats:["“Can I try something weird with you? Takes one swing.”","“Hum out loud the whole time.”","Let the shot finish in silence","“His hum broke in the exact spot his swing did.”"], pillar:"2 · The fix is never where you think", risk:"It turns into a golf lesson instead of one clean, unrepeatable test with a visible result.", verdict:"Shoot — the stranger controls the result.", series:"standalone", angle:"Can I prove it? His voice reveals the slice before the ball does.", format:"Game", pov:"I", hook2:"I told this stranger his next slice would show up in his voice first.", game:"Does his hum break exactly when the ball breaks right?", howfilm:"Capture one baseline slice, then keep his hum, swing, ball flight, and face in one uncut shot.", receipt:"The phone microphone and uncut ball flight prove whether the hum and slice break together.", payoff:"His hum cracks, the ball reacts, and his face confirms he felt it.", engage:"Every golfer knows one specific slicer who needs to see this before trying another swing thought.", promise:"Brixton keeps testing weird ten-second fixes on real golfers without controlling the result.", ev:"90", ev90:"1685", evwhy:"hum reach x guest ending — 5.35/1k on 16,787 typical reach.",
- t:"Hum a stranger at the range",
- tags:[["hit","Proven — 1.96M"],["","Range · 15 min"],["","Golf"]],
- hook:"This guy had been slicing it for twenty minutes. I asked him to hum out loud through one swing.",
- steal:"A trick they can try on their very next swing. Costs nothing, takes ten seconds, and they'll know immediately if it works.",
- film:["<b>Pick the guy who's been slicing it for twenty minutes.</b> Not a good player, not a kid. Roll before you walk up — you only get his reaction once.",
-       "<b>The ask is one sentence with no explanation in front of it:</b> <i>“Can I try something weird with you? Takes one swing.”</i> Don't tell him what's supposed to happen.",
-       "<b>Then shut up.</b> Stay on his face and his ball. Clean audio matters more than the picture here — the crack in the hum is the whole clip.",
-       "<b>Your line after, past tense:</b> <i>“his hum broke in the exact spot his swing did.”</i> Then stop."],
- convert:"His ball flight, and his face when it flushes. He did it — you didn't.",
- travel:"Anyone watching can hum on their next swing, for free, in ten seconds. That's the entire reason this did 1.96M.",
- note:"⛔ The hum is <b>never the subject and never an instruction.</b> <i>“Your only goal: a steady hum”</i> got 0 follows off 5,010 reach."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"2", hist:"10 clips in this format — 37,269 reach, 476 follows, 12.77 per 1,000. this format has produced his biggest clips — the best one took 465 follows — but it is wildly inconsistent, and most attempts convert far below it.", score:"84", sbreak:"Stop 17/20 · Watch 14/15 · Sends 12/15 · Value 12/15 · Proof 10/10 · Comments 7/10 · Follow 8/10 · Ease 4/5", beats:["“What do you think you’re doing wrong?”","one swing at normal speed","scan it while he watches","reveal the app’s answer","“What’d you think it was gonna say?”"], pillar:"2 · The fix is never where you think", risk:"The scan agrees with his guess, killing the surprise and leaving no payoff.", verdict:"Shoot — the guess-versus-scan reveal makes the belief visible.", series:"Can I prove it?", angle:"The flaw you notice is usually the effect; the lead domino happened one frame earlier.", format:"Game", pov:"Third Person", hook2:"Before the app answers, see if you can spot what he missed.", game:"He names his flaw first; the uncontrolled result is whether the scan agrees.", howfilm:"Get his guess, film one swing, hold on his reaction, flash the scan for one second, then ask what surprised him.", receipt:"The app’s frame-by-frame swing scan naming a different flaw than he did.", payoff:"He had been fixing what he could see, but the real problem happened one frame earlier.", engage:"Every golfer has a friend who keeps treating the visible symptom instead of the first broken move.", promise:"Another golfer guesses first, then the scan shows whether they’re working on the right thing.", ev:"64", ev90:"82", evwhy:"MARRIED — guest reach (4,981 typical) with an app-grade ending (12.77/1k). The only combination on this board that clears the pace.", married:"1", cta:"Tell me what you think your flaw is and I’ll tell you what it actually is.",
- t:"His guess vs the app — the only swing-scan card left",
- tags:[["hit","High-conversion lane · exact rate needs verification"],["","Range · 20 min"],["","Golf"]],
- hook:"He told me what was wrong with his swing. Then I showed him what was actually wrong.",
- steal:"What they think is wrong with their swing is almost certainly not what's wrong with it.",
- film:["<b>Ask him first: “what do you think you're doing wrong?”</b> Get his answer on camera before anything else — he hands you the entire setup for free.",
-       "<b>Film one swing, normal speed.</b> Run the scan while he watches. Camera stays on <b>him</b>, not the screen.",
-       "<b>Turn the phone around for one second.</b> Proof, not a tutorial. Then flip to the front camera and stay on his face: <i>“what'd you think it was gonna say?”</i>",
-       "<b>Close, past tense:</b> <i>“he'd been fixing the thing he could see. It was happening a frame earlier.”</i>"],
- convert:"The app naming something he didn't. One second of screen, maximum — any longer and it's a demo.",
- travel:"Weakest of the range clips on its own. <b>Make the question the copyable part:</b> end with <i>“tell me what you think your flaw is and I'll tell you what it actually is.”</i> That works without the app.",
- note:"⚠️ <b>Scanning someone you already know is tested and it died — 0 follows.</b> A stranger's face is the untested part, and it's the only part worth shooting. <b>This is the ONLY scan card on the board on purpose</b> — there were five."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"3", hist:"2 clips in this format — 35,631 reach, 12 follows, 0.34 per 1,000. great reach, poor conversion — every time.", score:"82", sbreak:"Stop 17/20 · Watch 12/15 · Sends 13/15 · Value 13/15 · Proof 9/10 · Comments 7/10 · Follow 7/10 · Ease 4/5", beats:["Five clubs, chosen before the first tee","one strike from each filmed hole","the double stays in","no swing thoughts, just the shot in front of me"], pillar:"1 · I test it on myself", risk:"Saying “nine holes” beside a 65 makes the result look inconsistent unless the full 18-hole scorecard appears clearly.", verdict:"Rework — the 65 needs a full 18-hole scorecard, not nine unexplained holes.", series:"standalone", angle:"Can I find the real constraint? Fewer clubs removed swing management, not difficulty.", format:"Game", pov:"I", hook2:"I took nine clubs out of my bag. Here’s what I shot.", game:"The running score reveals whether five clubs survive 18 holes, including the double I cannot hide.", howfilm:"Mount the phone, show all 18 scores through nine filmed strikes, then hold the completed scorecard on screen.", receipt:"The completed 18-hole scorecard showing 65, with the double visible, matched to the running score.", payoff:"Five clubs didn’t fix my swing. They got me out of it. I stopped managing mechanics and started hitting shots.", engage:"Every golfer will choose a different five, and every foursome has someone carrying 14 clubs but trusting three.", promise:"I test the golf ideas that sound wrong on myself, then show you the score.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.", cta:"Send this to the golfer carrying 14 clubs and trusting three.",
- t:"Five clubs, nine holes, 60 seconds",
- tags:[["hit","Real number: 65"],["","On course · one nine"],["","Golf"]],
- hook:"I shot 65 with five clubs in the bag. Best round I've played in years — and I never thought about my swing once.",
- steal:"Pull clubs out of the bag and you stop managing your swing. Anyone can test that on Saturday for free.",
- film:["<b>0:00–0:03 — the five clubs going in, the nine coming out.</b> Your hands, never your face. The hook runs over this. That shot is the whole premise in two seconds.",
-       "<b>0:03–0:45 — the nine holes, one strike each.</b> Wide, ambient, no music over talking. <b>Running score burned in the corner, updating hole by hole.</b> Phone on a cart mount or a clip — no operator.",
-       "<b>Leave one bad hole in.</b> A clean 65 reads as a brag. A 65 with a double on it reads as a result.",
-       "<b>0:45–0:60 — the payoff, and it is NOT “five clubs is better.”</b> It's that you stopped thinking about your swing and started hitting shots. Say it once, past tense, then stop.",
-       "⭐ <b>Roll before you know the score.</b> Play a real nine and don't know what you'll shoot. That's the jeopardy a highlight reel can never have."],
- convert:"The running score in the corner. One number, moving, that you don't control — and a scorecard at the end.",
- travel:"Anyone can play five clubs this weekend for free. Same mechanic as the hum — copyable, no equipment, sounds stupid until it works.",
- say:["I shot 65 with five clubs in the bag.",
-      "Best round I've played in years — and I never thought about my swing once.",
-      "That's not a coincidence. That's the whole reason.",
-      "When I've got fourteen clubs I'm out there managing my golf swing. Positions, mechanics, what my hands are doing. With five, I don't have the room for any of that. I've just got to look at the shot and go hit it.",
-      "So I played creative. I hit low ones, high ones, made stuff up. I actually enjoyed it — which I hadn't in a while.",
-      "Turns out the thing wrecking my golf was never my swing. It was thinking about my swing."],
- note:"✅ <b>The payoff is yours now, 10 Aug, in your words</b> — five clubs stops you focusing on mechanics, so you play creative and hit shots instead of managing the swing. <b>My earlier “pick a club vs pick a shot” line is cut.</b> Yours is better and it's on-thesis: <i>the fix is never where you think.</i><br><br><b>Same mechanism as the broken arm (card 8):</b> with one arm you physically could not force it. Here you can't think your way through it. <b>Remove the option, don't resist it.</b>"},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"4", hist:"2 clips in this format — 35,631 reach, 12 follows, 0.34 per 1,000. great reach, poor conversion — every time.", score:"88", sbreak:"Stop 18/20 · Watch 14/15 · Sends 14/15 · Value 12/15 · Proof 10/10 · Comments 8/10 · Follow 8/10 · Ease 4/5", beats:["Same nine, same five clubs, one variable","Say the mechanics before every shot","Show the result immediately","Keep a running score against 65"], pillar:"1 · I test it on myself", risk:"He starts teaching mechanics instead of exposing his own uncomfortable running commentary and score.", verdict:"Shoot — the score decides whether the belief survives.", series:"I test it on myself", angle:"Can I prove that swing mechanics cost me shots when everything else stays the same?", format:"Experiment", pov:"I", hook2:"Same nine. Same five clubs. This time, every swing thought stays in my head.", game:"Does thinking through every mechanic beat 65—or blow up the score?", howfilm:"Roll every shot, say every swing thought out loud, and keep the live score visible.", receipt:"Two signed scorecards from the same nine, shown side by side.", payoff:"65 versus the mechanics score—same nine, same clubs, no excuse.", engage:"Every golfer knows the one friend who turns a swing into a twelve-step checklist.", promise:"Next I’m testing whether one swing cue helps—or whether zero still wins.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.", cta:"Send this to your swing-thought friend.",
- t:"The other half — one nine thinking about NOTHING but mechanics",
- tags:[["hit","The control arm"],["","On course · one nine"],["","Golf"]],
- hook:"I shot 65 with five clubs without thinking about my swing. So I played the same nine thinking about nothing but my swing. Here's what I shot.",
- steal:"Two rounds, one thing changed: thinking about mechanics costs you shots. With the number to prove it.",
- film:["<b>Same nine, same clubs, one variable changed.</b> Say that out loud at the top so nobody can call it a stunt.",
-       "<b>Narrate the mechanics out loud as you play</b> — takeaway, wrist angle, hip turn, whatever you'd actually be thinking. <b>The tape of you talking yourself through a swing IS the clip.</b> Let it get uncomfortable.",
-       "<b>Same running score in the corner</b>, so the two clips cut together later.",
-       "<b>End on the two numbers side by side.</b> Don't say which is better — the screen already did.",
-       "⭐ <b>Roll before you know.</b> If it comes out lower, you post it anyway and that's the more interesting clip."],
- convert:"Two scorecards from the same nine, in one frame. You control neither.",
- travel:"<b>An A/B with a real number is the most forwardable thing you can make</b> — it settles an argument every golfer has had. And it's the same shape as naked-eye-vs-the-AI: two claims, one gets proven wrong on tape.",
- note:"<b>This is the experiment the 5-club round is missing.</b> One round with a good score is a story; two rounds with one variable changed is a finding — and the finding is the pillar.<br><br>⚠️ <b>You already have the long-form receipt for this:</b> you ground on mechanics and went from plus-3 to a 2 handicap. <b>Five shots worse, from practising harder.</b> That's the same result over years that this clip gets in an afternoon. Use it as the last line if the round doesn't cooperate."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"5", hist:"39 clips in this format — 264,457 reach, 228 follows, 0.86 per 1,000. neither reach nor conversion — the format itself is the problem.", score:"80", sbreak:"Stop 17/20 · Watch 13/15 · Sends 13/15 · Value 12/15 · Proof 9/10 · Comments 6/10 · Follow 6/10 · Ease 4/5", beats:["The seven things you were actually working on","the outsider who cut six","the surviving priority, named plainly","six straight months doubled","“I thought being on seven things was the job.”"], pillar:"4 · Go to the source", risk:"He starts explaining the seven instead of silently crossing six, and it becomes another talking-head business lesson.", verdict:"Rework — make the six-month result the visible score, not just a claim.", series:"standalone", angle:"Finding the real constraint meant admitting that staying busy was not the job.", format:"Game", pov:"I", hook2:"Pause on these seven. Pick the one you think doubled the company six months in a row.", game:"Seven priorities go in, one survives, and the score is how many months the company doubles.", howfilm:"Film straight down on the page, silently cross out six, circle the survivor, then reveal the six-month score.", receipt:"The monthly revenue dashboard showing six consecutive monthly totals, displayed as a 1/6 through 6/6 counter.", payoff:"One priority survives, then the counter lands on six out of six.", engage:"Founders will send it to the overloaded person beside them and compare which priority they would keep.", promise:"Next time I find a lead domino, I’m putting the decision and the score on camera.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.", cta:"What’s your one?",
- t:"The seven things",
- tags:[["","Kitchen table · 10 min"],["","Business — not golf"]],
- hook:"I brought someone in to tell me what was broken in my company. I was working on seven things. He told me to work on one — and we doubled six months in a row.",
- steal:"Working on seven things is the reason none of them move. The question is which one is your one.",
- film:["<b>Write the seven on paper BEFORE you roll.</b> Start filming on the pen, not your face.",
-       "<b>Cross off six, one at a time, quiet.</b> Don't read them out — nobody cares what they were. The crossing-out is the shot.",
-       "<b>Say only the one that survived, then the result.</b> Flat. No build-up.",
-       "<b>Last line, about you:</b> <i>“I thought being on seven things was the job.”</i>"],
- convert:"The list — seven lines becoming one, in your hand, while the camera rolls.",
- travel:"Business clips don't travel on their own. End on <i>“what's your one?”</i> — that's the only lever this card has, and it's a real one.",
- note:"John's pillar: <b>right things, right order.</b> The most portable idea you own — it works in business, health, time and golf, which is exactly why it isn't a golf clip."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"6", hist:"39 clips in this format — 264,457 reach, 228 follows, 0.86 per 1,000. neither reach nor conversion — the format itself is the problem.", score:"84", sbreak:"Stop 18/20 · Watch 14/15 · Sends 14/15 · Value 10/15 · Proof 10/10 · Comments 7/10 · Follow 7/10 · Ease 4/5", beats:["He wrote it on the whiteboard","I saw it","Year one. Year two. Year three. Year four.","It could have killed me. I let it fill me."], pillar:"5 · Getting chipped", risk:"If the dates and top-rep ranking are too small to read, four screenshots become four meaningless phone screens.", verdict:"Rework — turn the four screenshots into a visible streak.", series:"standalone", angle:"Can I prove the person who wrote me off wrong four years in a row?", format:"Receipt Story", pov:"I", hook2:"I kept three words from my first sales manager. Then I kept score.", game:"Does the top-rep streak survive when I turn over all four years?", howfilm:"Shoot one locked overhead take: write the words, then turn over one dated screenshot at a time.", receipt:"Four dated top-rep screenshots, revealed one at a time beneath “Brixton is useless.”", payoff:"The fourth screenshot completes the streak, then: “It could have killed me. I let it fill me.”", engage:"Everyone who has been written off knows the exact person this needs to reach.", promise:"Next, I’ll show you the lead domino that made year one possible.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.", cta:"Send this to the person who kept the sentence.",
- t:"Brixton is useless",
- tags:[["","Whiteboard · 15 min"],["","Adversity — not golf"]],
- hook:"My first sales manager wrote “Brixton is useless” on the whiteboard. I don't think I was meant to see it.",
- steal:"What someone writes you off with is worth more kept than argued with.",
- film:["<b>Start on your hand writing those three words.</b> Say the hook while you write them.",
-       "<b>Two sentences only:</b> what he wrote, and that you saw it. Don't explain how it felt.",
-       "<b>Hold up the screenshots — top rep, year after year.</b> Say the years out loud: <i>“year one. year two. year three. year four.”</i> The list running long IS the payoff.",
-       "<b>Last line, about you:</b> <i>“It could have killed me. I let it fill me.”</i>"],
- convert:"The screenshots. Four results in a row, on screen. Without them the whiteboard is just a story.",
- travel:"<b>The one non-golf card that genuinely travels</b> — underdog stories get forwarded. ⚠️ A non-golf hook gets served to a non-golf room, so if it reaches wide and converts nothing, that's a targeting result, not a bad clip.",
- note:"⛔ <b>Cut “go and prove them wrong.”</b> The moment it becomes advice it stops being yours."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"7", hist:"2 clips in this format — 35,631 reach, 12 follows, 0.34 per 1,000. great reach, poor conversion — every time.", score:"85", sbreak:"Stop 18/20 · Watch 13/15 · Sends 12/15 · Value 14/15 · Proof 9/10 · Comments 7/10 · Follow 8/10 · Ease 4/5", beats:["Driver cost: $___","Drive time bought back: ___ minutes","Calls and work finished from the back seat: ___","What that completed work was actually worth: $___","Cost per hour bought back: $___"], pillar:"1 · I test it on myself", risk:"The phone numbers are too small to read, so the game disappears and it becomes a rich-guy chauffeur story.", verdict:"Shoot — if the real passenger-seat result decides whether the math works.", series:"Things I do to buy back time", angle:"Can I measure it? Whether buying back the drive creates more value than it costs.", format:"Game", pov:"I", hook2:"Can I make more from this back seat than this driver costs me?", game:"Before we arrive, does the work I finish from the back seat beat the cost of the driver?", howfilm:"Start tight on the phone, run the live math in one take, then reveal the final back-seat score.", receipt:"The calculator, ride receipt, trip timer and completed call log on his phone.", payoff:"That ride cost me $___, and the back seat bought me ___ — so I won/lost by $___.", engage:"Anyone who regularly commutes will send it to the person who insists driving themselves is cheaper.", promise:"Episode one. I do this with everything. I’ll keep posting them.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.", cta:"Run the math on your next commute.",
- t:"⭐ SERIES — “Things I do to buy back time.” Ep. 1: the drive vs the driver",
- tags:[["hit","Your idea — make it a series"],["","In the car · 8 min"],["","Time — not golf"]],
- hook:"I worked out it was cheaper to pay someone to drive me than to drive myself. Here's the math, on my phone, while I did it.",
- steal:"The maths on their own commute, done out loud. Almost nobody has ever run that number.",
- film:["<b>Frame one is the phone screen with the math on it.</b> Never your face, never the car first.",
-       "<b>Do the math out loud in one take.</b> Hours, dollars, calls you can take from the passenger seat. <b>Leave the wrong turns in</b> — watching you get to it beats being handed it.",
-       "<b>Last line, past tense: what the hours actually bought.</b> Name the specific thing — not “freedom.”",
-       "<b>Say “episode one” out loud.</b> One line at the end: <i>“I do this with everything. I'll keep posting them.”</i>"],
- convert:"The math on screen. A number you didn't control, readable in one glance.",
- travel:"<b>The most non-golf idea you own</b> — everyone has a commute and nobody has run this number. As a series it compounds: each episode is a reason to come back rather than a reason to share once.",
- note:"<b>✅ Your call, 10 Aug — this becomes a series, and it's the best structural idea on the board.</b> One clip about time math is a curiosity. <b>A CEO publicly running the numbers on his own life, weekly, is a franchise</b> — and it's John's pillar (compress time) with a format attached instead of a philosophy.<br><br><b>The supply is already there — 6 more episodes, no research needed:</b> ② how you read a restaurant menu ③ how you book a hotel ④ meetings only two days a week ⑤ what you decided NOT to do this week ⑥ the four things you write every morning ⑦ selling your car for four months to lock in.<br><br><b>Shoot ep. 1 and ep. 2 the same day.</b> A series that posts one episode is a clip."},
-
-{sec:"go", ez:"GO", rail:"Go shoot", n:"8", hist:"39 clips in this format — 264,457 reach, 228 follows, 0.86 per 1,000. neither reach nor conversion — the format itself is the problem.", score:"85", sbreak:"Stop 18/20 · Watch 13/15 · Sends 14/15 · Value 12/15 · Proof 10/10 · Comments 6/10 · Follow 7/10 · Ease 5/5", beats:["Four plates. Twenty screws. They’re still in there","In March, I couldn’t do a push-up","I practiced one-handed because forcing it wasn’t an option","In July, I shot 69–66 and won the tournament."], pillar:"1 · I test it on myself", risk:"The scorecard numbers and dates are too small to read on a phone, so the proof—and the entire payoff—disappears.", verdict:"Shoot — the X-ray and dated scorecard turn the comeback into proof.", series:"standalone", angle:"What happens when an injury removes the bad option your willpower could not.", format:"Game", pov:"I", hook2:"Could one broken arm fix the part of my golf swing I couldn’t?", game:"Whether a swing built one-handed would hold up under tournament pressure—the score was out of my control.", howfilm:"Open silently on the X-ray, show your arm, then reveal the dated scorecard as the final shot.", receipt:"The dated X-ray and the original 69–66 tournament scorecard.", payoff:"The scorecard reveals that the one-handed swing held up well enough to win.", engage:"Someone mid-comeback will need the X-ray-to-scorecard proof, while golfers will debate whether the constraint or recovery changed the swing.", promise:"The next self-test also ends with a score, not an opinion.", ev:"3", ev90:"8", evwhy:"solo reach, but nothing on screen answers back — it converts at 1.36/1k, your worst rate across 63 clips. Give it an instrument and it multiplies by 9.",
- t:"The broken arm — the X-ray and the dated scorecard",
- tags:[["","Archive + phone · 15 min"],["warn","Moved off Mick's list — your call"]],
- hook:"I woke up one morning saying I needed a challenge. That afternoon my arm was in four pieces.",
- steal:"You physically cannot force a swing with one arm. Removing the option beats fighting the habit.",
- film:["<b>Frame one is the X-ray.</b> Hold it a beat and a half before any audio. Four plates, twenty screws — and they're still in there, so show the arm too.",
-       "<b>Then the dated scorecard: 69–66.</b> <b>Give the two dates flat and let the viewer do the math</b> — March, couldn't do a push-up; July, won the tournament. Never narrate how impressive it is.",
-       "<b>One line on the one-armed practice</b>, past tense. <b>The point is that you physically could not force it</b> — the constraint did the coaching.",
-       "Under 40 seconds. Four lines total."],
- convert:"Two physical artifacts with numbers on them — the X-ray and the scorecard — in one glance.",
- travel:"It earns its slot on the <b>send</b>, not the reach: this is what someone forwards to a person who's mid-comeback.",
- note:"<b>Moved out of Mick's edit queue and onto yours</b> — your call, 10 Aug: <i>“that's not a Mick edit, it's more me.”</i><br><br>⚠️ <b>Don't let “a couple years ago” reach camera</b> — the real date is 5 March 2012 and the two-dates-flat structure needs the true year. ⚠️ <b>The tournament name is still unconfirmed</b> (you said “Blanco,” then corrected it). Don't name it on camera until you're sure."},
-
-/* ═══════════ WORKING IDEAS ═══════════ */,
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W1",
- t:"THE WALKS, day 1",
- need:"One sentence: <b>what the ten years of compression actually bought back.</b> Not “freedom” — an actual afternoon, room, trip or conversation. Everything else on this card is written.",
- shoot:"Frame one is the phone screen with the live follower counter. Hold 1.5s, pocket it, walk into frame. On a walk the phone screen is the only instrument you have."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W2",
- t:"The range you actually go to",
- need:"<b>Which range can you approach people at without it being weird</b> — and out of ten, how many say yes? Cards 1 and 2 both depend on this number.",
- shoot:"If it's 2 in 10, we shoot the volume version and the rejections become their own clip: “I asked ten strangers if I could film their swing.” If it's 8, clean one-on-ones and never mention the ask."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W3",
- t:"Heart rate, done properly",
- need:"<b>What actually failed on the two you shot?</b> Was the number too small to read, did it need a cut to show it, or did nobody care? Each one has a completely different fix and I'm not researching devices until I know which.",
- shoot:"Parked until a device exists that puts a big legible number on screen with no cut. It was the best instrument on paper and the worst in practice."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W4",
- t:"THE ROOT CAUSE, episode 2",
- need:"<b>One name genuinely confirmed in the next 30 days.</b> Not who you'd like — who's said yes. Episode 1 is written; the franchise dies at two without a subject.",
- shoot:"For each: the one area of their life that's visibly broken, and the person who could diagnose it."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W5",
- t:"Moat reveal, episode 2",
- need:"<b>What can the app do today that it couldn't in July?</b> One capability, ideally one that looks like something on screen. The original is still your best-converting clip ever and it has never had a sequel.",
- shoot:"Also worth having: any number you're now allowed to say out loud that you weren't before — swings analysed, users, accuracy."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W6",
- t:"The academy — a before and after",
- need:"<b>When's the next one, and can a camera be in the room?</b>",
- shoot:"Scan one attendee on arrival and again at the end. That's a genuine before/after nobody controls, and the two-day intensive is the most naturally filmable product you have."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W7",
- t:"The non-golf arena you want to be known for",
- need:"<b>Business, body, people or life — which one?</b> John's warning is that an all-golf feed reads as “he's trying to get me to download the app.” I'd rather go deep on one arena you actually care about than sprinkle four.",
- shoot:"Cards 4–7 are one each, as a test. Whichever converts best, we go deep and drop the others."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W8",
- t:"The everyday-thinking clips John asked for",
- need:"<b>Which of these are real for you?</b> John named them specifically: how you read a food menu, how you book a hotel, how you route a day, how you decide what NOT to do this week.",
- shoot:"Each one is a 30-second phone clip, frame one on the thing not your face. These are the cheapest non-golf content you own and none has ever been shot."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W9",
- t:"The experiment running right now",
- need:"<b>What are you actually testing this week?</b> Sleep, training, food, time — anything with a number you don't control. Tell me which and I'll write the hook.",
- shoot:"Frame one is the data — the app, the scale, the watch. Say what you expected, then what it said, in that order. <b>Show the part that's going wrong</b> — that's the only reason anyone comes back."},
-
-/* ═══════════ MICK — EDIT, NO CAMERA ═══════════ */,
-
-{sec:"ed", ez:"ED", rail:"Edit", n:"E1",
- t:"Every range-hum walk-up in the ACC raw, cut as its own clip",
- tags:[["hit","You approved this one"],["","ACC raw"],["","No camera"]],
- hook:"I asked a stranger at the range to hum out loud through one swing. Watch what it did to his ball flight.",
- film:["<b>Scrub the range footage for every single time Brixton walked up to someone and asked them to hum.</b> Each one is its own clip — never a montage.",
-       "Frame one is <b>them</b>. Keep the ask exactly as it happened, no trim.",
-       "Hold on their face through the swing. <b>If a take has no visible result, it isn't one of these clips.</b>"],
- convert:"The stranger's ball flight and their face.",
- travel:"The proven 1.96M format. There should be several of these in a tournament week and only one has ever been cut.",
- note:"<b>Free reach sitting on a drive.</b> No shoot, no booking, no ask."},
-
-{sec:"ed", ez:"ED", rail:"Edit", n:"E2",
- t:"Hollis Stacy — 4 shorts off the video that already did 150K",
- tags:[["hit","Long-form already trended"],["","YouTube, live"],["","No camera"]],
- hook:"“It brings the best in the world anxiety.” — Hollis Stacy, 73",
- film:["⭐ <b>EVERY short must show her actually STRIKING it, not just talking.</b> Her lines only land if the viewer has seen her play — otherwise she's a 73-year-old giving quotes. <b>Cut one of her real shots into the first four seconds of all four.</b> The ready-made credibility beat is at <b>0:10–0:16</b>: she flushes one, says <i>“oh, I hit that well,”</i> and Brixton says <i>“look at that — this lady can play.”</i> That pair earns everything after it.",
-       "<b>Correction the board had wrong: this SHIPPED and it worked.</b> The long-form did <b>150,000+ views in two days</b> and trended. What's unshipped is the shorts — cut four, one idea each.",
-       "<b>① THE NERVES SHORT (36:29–37:04) — the strongest.</b> Brixton: “take me through the feeling on the last hole of a major.” Hollis: <i>“You feel like you're going to throw up.”</i> Then he says new golfers tell him the game gives them anxiety and she cuts in: <i>“It brings the best in the world anxiety.”</i> <b>Open on her face, not his question.</b>",
-       "<b>② TEMPO (36:04–36:29)</b> — her U.S. Open winning shot: 160 to the hole, 130 of it over water, out of the right rough. Her only swing thought: <i>“tempo, tempo, tempo.”</i> One line, one payoff.",
-       "<b>③ “THANK YOU FOR MAKING ME FEEL OLD” (01:01–01:40)</b> — he says she was winning Opens when he was born. Her comeback lands instantly, then: <i>“this game is endless. It's ageless.”</i> That's the whole thesis in nine seconds.",
-       "<b>④ THE AGE ANSWER (37:55–38:10)</b> — <i>“when you get over a certain age you really have to stretch. I hate that word.”</i> Funny, honest, and it's the answer to the question the video asks."],
- watch:["<b>The long-form — watch this before cutting anything.</b> All four shorts come out of it: https://www.youtube.com/watch?v=ZHFnqthG6-A",
-        "<b>The Instagram post we already did with her</b> — 10–11 June on @brixton_pg, the only Hollis post on the grid. <b>Brixton: paste the link and I'll pin it here.</b>"],
- convert:"Her, saying something she wasn't fed — <b>after you've watched her flush one.</b> Every short opens on <b>her</b>, never on Brixton. If he's on screen first it's his clip and it converts like a solo.",
- travel:"The premise carries it on its own: <b>73 years old, still scratch, went toe to toe with a plus handicap.</b> The long-form already proved the demand — <b>150,000+ views in two days.</b> These shorts fish in a pond that's already stocked.",
- note:"<b>The four timestamps above are real</b>, pulled from the video transcript, not estimated. ⚠️ Her age is said as <b>72 in one place and 73 in another</b> in the same video — pick one and hold it across all four shorts."},
-
-{sec:"ed", ez:"ED", rail:"Edit", n:"E3",
- t:"ACC — the putter-switch ask, if the footage holds up",
- tags:[["warn","Confirm the footage first"],["","ACC raw"],["","No camera"]],
- hook:"Can I convince a celebrity to change putters twenty minutes before they tee off?",
- film:["<b>This is the best idea in your footage doc and it's listed as an “optional pull.”</b> It shouldn't be optional — it's the only ACC concept with a question in it that the footage answers.",
-       "<b>Pull together:</b> Davante gifting the putter day 2 · Nate B considering the switch · the Jason Kelce and “look up his name” gifting clips.",
-       "<b>The clock is the tension — say the time out loud.</b> Twenty minutes out, and he's changing the most superstitious club in the bag.",
-       "<b>The payoff is his decision, not the gift.</b> Does he put it in play or hand it back? If the footage doesn't answer that, this card doesn't ship."],
- convert:"His decision, on camera, that you don't control.",
- travel:"Collab with whoever takes the putter. The ask is the format and anyone can picture being asked.",
- note:"⚠️ <b>Unverified:</b> I'm working from your doc's shot list, not the footage itself. If nobody's decision is actually on tape, this becomes a shoot card for the next event instead of an edit."},
-
-{sec:"wk", ez:"WK", rail:"Needs you", n:"W10",
- t:"I called every coach Tiger ever paid — moved here, on your question",
- need:"<b>You asked the right question: what's the payoff for someone else? Right now there isn't one.</b> “Four of them ended up working for me” is a flex — the viewer gets nothing to take. <b>What I need is the finding: what did they actually disagree about, or what did every one of them say that nobody teaches?</b> That's the clip. The calling is just how you got it.",
- shoot:"Once you give me that, the hook becomes one of these — <i>“I asked every coach Tiger Woods ever paid the same question. They didn't agree on a single thing.”</i> or <i>“…and all four told me the same thing, which is the opposite of what gets taught.”</i> Frame one is the screenshots, names scrolling, and the finding lands last."},
-
-
-/* ═══════════ THE PEOPLE BANK ═══════════ */
-
-{sec:"pp", ez:"PP", rail:"Slater", n:"K1",
- t:"The man who can't force it",
- tags:[["hit","Highest ceiling on the board"],["","10 min · no gear"],["","Life — not golf"]],
- hook:"He's won eleven world titles in a sport where forcing it is physically impossible. Then he took up golf.",
- film:["<b>Camera on HIM. Frame one is Kelly, not you.</b> Walk-and-talk or two chairs — doesn't matter, this is a question and a silence.",
-       "<b>Ask the one question, word for word:</b> <i>“You spent thirty years in a sport where forcing it doesn't work — the wave doesn't care. Then you picked up the one sport where everybody forces it. What did surfing already teach you that golfers spend their whole lives not learning?”</i>",
-       "<b>Then say nothing.</b> No follow-up, no golf tip, no PG1. The pause is what makes him go deeper.",
-       "<b>Your close, past tense:</b> <i>“he didn't say anything about golf. That was the answer.”</i>"],
- convert:"A world champion explaining why trying harder made you worse — in a language that isn't golf, so nobody gets defensive.",
- travel:"Sent to the friend grinding at something and getting worse. Surfing lets the point land without the golf ego in the way.",
- note:"<b>Research:</b> Slater is a real <b>2-handicap</b> who plays <b>~150 rounds a year</b>, took golf up at 23, won Golf Digest's Arnie Award. Adam Scott: <i>“he communicates on a golf level with me like we're dead equals.”</i> ⛔ <b>Do not shoot the celebrity-holds-a-club format</b> — he's better than almost anyone you'd put in frame. Treat him as a peer. 📈 His audience is multiples of yours and <b>almost entirely non-golf</b> — the best arena-mix clip available all year. ⛔ <b>COLLAB or it's worth ~1,200 reach.</b><br><b>Also ranked, same shoot:</b> ③ surf-feel → golf-feel on a launch monitor · ④ what he stopped doing at 40 to still be doing this at 54 (BODY) · ⑤ two sports, one root flaw · ⑥ hum a world champion (proven format — don't spend a rare person on a re-run)."},
-
-{sec:"pp", ez:"PP", rail:"Slater", n:"K2",
- t:"The scan on a 2-handicap",
- tags:[["hit","App-result conversion lane"],["","Range · 20 min"],["","Golf"]],
- hook:"He's a two handicap and an eleven-time world champion. He still guessed wrong.",
- film:["<b>Ask first:</b> <i>“what do you think is wrong with your swing?”</i> A 2-handicap's answer is sophisticated — that's exactly why it lands when the machine says something else.",
-       "<b>One swing, back camera.</b> Run the scan while he watches.",
-       "<b>One second of screen, maximum.</b> Then <b>flip to the front camera and stay on his face.</b>",
-       "<b>Close, past tense:</b> <i>“I was a plus-three and I spent five years fixing something that wasn't broken.”</i>"],
- convert:"Everyone assumes good players know their own miss. Watching a world champion find out he doesn't is the argument that the viewer doesn't either.",
- travel:"The clip you send to the scratch buddy who's sure he's got it figured out. Soft dunk = most reliable send in golf.",
- note:"Same format as ClickUp card <b>5-SEC VERDICT 01 — THE GUESS</b>, on the best possible subject. ⛔ Tag + collab."},
-
-{sec:"pp", ez:"PP", rail:"Harrison", n:"H1",
- t:"The whiteboard and the headline",
- tags:[["hit","Fixes the P5 problem"],["","2 chairs · 15 min"],["","People — not golf"]],
- hook:"A boss wrote on a whiteboard that I added zero value. I kept it. Then I met a guy whose version was the whole internet.",
- film:["<b>You go first, and you go SMALL.</b> Read your whiteboard line out loud, say how long you kept it. One guy, one office. Don't inflate it.",
-       "<b>Then one question and silence:</b> <i>“Mine was one guy in an office. Yours was the entire internet. What actually changes when it's that big?”</i>",
-       "<b>Camera favours him.</b> Your job is to go first so he can go deeper — not to match him.",
-       "<b>Close:</b> <i>“mine was a whiteboard. His was a news cycle. Same job.”</i>"],
- convert:"Two people comparing the same experience at wildly different scale, and neither one performing recovery.",
- travel:"Sent to someone in the middle of getting written off — the clip you send instead of advice.",
- note:"<b>Research:</b> hosted The Bachelor ~19 years, exited 2021 amid public controversy, now in Austin, runs <i>The Most Dramatic Podcast Ever</i>, has a <b>new Fox Nation dating series greenlit for 2027</b>. ⚠️ <b>PARTNER, NEVER PUNCHLINE</b> — don't relitigate 2021, don't make the controversy the hook, don't let the edit imply a verdict. <b>Send him the question in advance.</b> 🎯 <b>Why this is ranked #1 for him:</b> Pillar 5 has zero data and its natural format — the solo confession — keeps dying at ~2.3/1k. The framework's own rule is that P5 only ships on <i>another human, a real exchange, or a physical artifact</i>. This is all three. 📈 His audience is entirely non-golf and skews female — a demographic the feed has never touched.<br><b>Also ranked:</b> ③ two guys who got fired from the thing they built (only if it's genuinely true for you) · ④ he reads your worst comments out loud · ⑤ the scan (lowest — don't burn a non-golf guest on the golf format)."},
-
-{sec:"pp", ez:"PP", rail:"Harrison", n:"H2",
- t:"The guy who asked questions for nineteen years, interviewed",
- tags:[["","Uncontrolled instrument"],["","10 min"],["","People"]],
- hook:"He asked people the hardest question in the room for nineteen years. I let him point one at me.",
- film:["<b>Hand him the interviewer's chair.</b> <i>“You've asked people the hardest question in the room for nineteen years. Ask me one.”</i>",
-       "<b>Do NOT pre-screen the question.</b> The second it's pre-screened the format is dead and it reads as an ad.",
-       "<b>Answer it honestly, whatever it is.</b> Camera stays wide enough to hold both of you.",
-       "<b>No close needed.</b> The answer is the ending."],
- convert:"The interviewer-gets-interviewed flip, run by a professional who'll get somewhere a friend never would.",
- travel:"People forward the answer, not the setup — so the answer has to cost you something.",
- note:"📟 This is a genuinely <b>uncontrolled instrument</b>, the rarest property on this board. ⚠️ Only shoot it if you're willing to ship an unflattering answer."},
-
-{sec:"pp", ez:"PP", rail:"Horvat", n:"G1",
- t:"The one thing Tiger never told him",
- tags:[["hit","1.75M subs"],["","20 min · come ready"],["","Golf"]],
- hook:"He's had swing advice from Tiger Woods. Here's the thing nobody told him.",
- film:["<b>Get the list first:</b> <i>“You've played with Tiger, Scottie, Bryson. What have they told you about your swing?”</i> Let him list it out — he's building your setup for free.",
-       "<b>One swing, then the scan.</b> Camera on him while he watches.",
-       "<b>The hook writes itself if the machine finds something that isn't on his list.</b> If it IS on his list, that's still a clip — say so.",
-       "<b>Close, past tense:</b> <i>“I had every resource and I still spent five years on the wrong thing.”</i>"],
- convert:"A guy with the best access in golf still has a blind spot — which says the problem is diagnosis, not effort.",
- travel:"The clip a golfer sends to say “see, even HE doesn't know.”",
- note:"<b>Research:</b> <b>1,751,227 YouTube subscribers</b> (July 2026). Challenge content at elite courses. Has filmed with <b>Tiger, Bryson, Scheffler, Mickelson, Morikawa, Nelly Korda</b>. Co-launched <b>Your Golf Tour</b> with the Bryan Bros — a creator league with $1M in prize money. 🔑 <b>He doesn't need another golf challenge and you'll never out-golf his guest list. Your leverage is the machine</b> — he's played with the best on earth and has never had one tell him what's actually wrong. 📈 <b>Biggest single distribution event available to you</b>, and his audience is exactly PG's buyer. ⛔ <b>COLLAB — a tag here leaves six figures of reach on the table.</b> ⚠️ Come with the idea fully formed and shoot it in under 20 minutes. Creators say yes to easy.<br><b>Also ranked:</b> ③ scan the whole Your Golf Tour field, ranked worst-to-best, revealed in reverse · ④ what a million subscribers actually costs (BUS — breaks the golf cap) · ⑤ the two-minute fix in one take (insurance clip)."},
-
-{sec:"pp", ez:"PP", rail:"Horvat", n:"G2",
- t:"Man vs machine, for money",
- tags:[["","Merges your two ideas"],["","Needs a third person"],["","Golf"]],
- hook:"A guy with a million and a half subscribers versus a machine. One of them called it.",
- film:["<b>Bring a third golfer</b> — a stranger, a caddie, anyone. They're the subject; you and Grant are the contestants.",
-       "<b>Grant watches them swing and calls the flaw out loud, on camera.</b> Then the scan.",
-       "<b>Then they hit balls</b> and you find out which fix actually moved the ball. A real result settles it.",
-       "<b>Close, past tense:</b> <i>“the eye sees the symptom. The thing that caused it happened a half-second earlier.”</i>"],
- convert:"A real competition with a real referee — the viewer picks a side in the first three seconds and has to stay for the answer.",
- travel:"Forwarded as an argument-starter. People send it to take a side.",
- note:"🔗 This is <b>HUMAN VS MACHINE merged with THE FOURSOME RANK</b>, which is what you asked for. ⛔ <b>Grant is a partner and must be able to win.</b> A format where the guest is set up to lose gets shot once and never again."},
-
-{sec:"pp", ez:"PP", rail:"Player", n:"P1",
- t:"They told him lifting would ruin his swing",
- tags:[["hit","BODY — the starving arena"],["","20 min · no course"],["","Zero golf in it"]],
- hook:"They told him lifting weights would ruin his golf swing. He's ninety and he's still training barefoot.",
- film:["<b>Film the actual routine</b> — barefoot on hardwood, bands, balance work. <b>The body is the instrument</b> and it answers back better than any screen.",
-       "<b>One question:</b> <i>“They told you lifting would ruin your golf swing. What did you know that they didn't?”</i>",
-       "<b>Camera on him. No golf swing required, no course required.</b> Under twenty minutes, start to finish.",
-       "<b>Close, past tense:</b> <i>“sixty years of people telling him he was wrong. He just kept training.”</i>"],
- convert:"A ninety-year-old who was right for sixty years, with the body standing there as the proof.",
- travel:"A permission slip with nine majors attached — sent to anyone being told their approach is wrong. The barefoot-at-ninety footage is the send; nobody scrolls past it.",
- note:"<b>Research:</b> <b>90 years old</b> (b. 1 Nov 1935), <b>9 majors</b>, career Grand Slam, “The Black Knight.” Still trains daily: <b>~45 min of stretching, resistance bands and balance work barefoot on hardwood</b>, plus walking and breathing work. Has done the WHOOP podcast on longevity. ⚠️ <b>He no longer swings competitively</b> — he demonstrates mechanics and preaches <b>posture and rhythm over power</b>. <b>Do NOT build a match or a challenge around him.</b> 🔑 <b>He is your five pillars, sixty years earlier, already proven</b> — he experimented on himself when nobody did, and he got chipped for the exact thing he's now famous for. 🎯 BODY is the starving arena and this has zero golf in it, which is exactly what the 25% cap needs. ⚠️ Respect the ninety: short shoot, no stunts, nothing physical he hasn't already chosen to do.<br><b>Also ranked:</b> ③ what he'd tell his thirty-year-old self · ④ the travel record nobody will beat (compression, in someone else's mouth) · ⑤ two generations, same root flaw."},
-
-{sec:"pp", ez:"PP", rail:"Player", n:"P2",
- t:"Rhythm over power, from the man with the receipts",
- tags:[["","Pillar 3, best proof source alive"],["","Range or studio"],["","Golf"]],
- hook:"Nine majors. He says the whole game is rhythm, and the AI agrees with him.",
- film:["<b>Him demonstrating rhythm and posture</b> — the thing he still does for students. Let him talk over it.",
-       "<b>Then your swing, graded, chasing speed.</b> The contrast is the clip.",
-       "<b>One line from him, unprompted.</b> Don't fish for it.",
-       "<b>Close, past tense:</b> <i>“I chased clubhead speed for five years and got five shots worse.”</i>"],
- convert:"The entire modern game is speed training, and the most decorated man in the room says the opposite — with a machine backing him.",
- travel:"The anti-speed-training clip the golf internet will argue about. Argument is the send.",
- note:"⛔ <b>Never frame it as old-vs-new or him-vs-the-machine.</b> He's the authority; the tech agrees with him. Collab."},
-
-{sec:"pp", ez:"PP", rail:"Speed golf", n:"S1",
- t:"🔴 The speed-golf match — blocked on one fact",
- tags:[["","Needs his last name"],["","Concept is strong"],["","Golf"]],
- hook:"He ran eighteen holes while I walked them. He had fifteen seconds a shot. Here's what he shot.",
- film:["<b>⚠️ I could not identify “Romano” in any speed-golf record.</b> Verified holders: James Carvill (Guinness individual, 27:09, 1987), Luke Willett (ISGA Speedgolf, 36:04, 2024), Jester Park team record. <b>Send a last name, handle or link and I'll build the full card set.</b>",
-       "<b>The clock is the instrument</b> — one glance, moves while rolling, and you can't control it. Keep it on screen the whole time.",
-       "<b>Do NOT shoot “look how fast he goes.”</b> That's a stunt with no finding.",
-       "<b>Shoot the deliberation gap:</b> he gets ~15 seconds a shot — no practice swing, no alignment routine, no second-guessing — <b>and he still scores.</b>"],
- convert:"It's the cleanest demonstration of your actual thesis that exists: the deliberation is the problem, not the swing.",
- travel:"Every golfer has stood over a ball too long and made it worse. This is that, with a scoreboard.",
- note:"<b>Your line, past tense:</b> <i>“I've stood over a ball for thirty seconds and made it worse. He never had the option.”</i> 🔴 <b>Blocked until the name is confirmed.</b>"}
-];
-
-const SECS = [
- {k:"new", h:"★ Three fresh bets for today", d:"<b>Generated this morning and ranked as directional opportunities, not forecasts.</b> Every one is MARRIED — a reach mechanism that has actually travelled on this account, plus a number that moves on screen at the end. Anything that could only do one of those two was dropped before it got here. <b>Shoot the top one first.</b>"},
-
- {k:"go", h:"① Go shoot these", d:"<b>Eight cards. Read one, go film it.</b> Ordered easiest-to-shoot-right-now, not best-clip-first — cards 4 through 8 need nobody and nothing you don't already own. <b>Four are golf and four aren't</b>, which is John's rule: an all-golf feed reads as “he's trying to get me to download the app.”"},
- {k:"wk", h:"② Working ideas — one answer each and they move up", d:"<b>Every one of these is real and under-specified.</b> Each says exactly what I need from you, plus one line on how it'd be shot once I have it. <b>Voice-note the answers if that's faster</b> — they don't need to be tidy."},
- {k:"pp", h:"③ The people bank — the shoots already on your calendar", d:"<b>Ranked, researched, and written against who each person actually is</b> — not a celebrity template. Top two per person are full cards; ranks ③–⑥ are listed at the bottom of each #1 card. <b>The rule that decides all of them: ask for the COLLAB in the moment, on camera day.</b> A tag puts it in their notifications; only a collab lands on both grids. Untagged access = ~2,130 reach, proven twice eight days apart. @taeadams collab = 93,004. @cvagolf = 315–362K."},
- {k:"ed", fold:true, h:"④ Mick — edit only, no camera", d:"<b>Reach already sitting on a drive.</b> No shoot, no booking, no ask. <b>Rebuilt 10 Aug against your actual footage docs</b> — the ACC cards below now carry your own beat maps and timecodes instead of general direction, and the Hollis card carries four real timestamps pulled from the video. <b>Folded shut because none of it is your job.</b>"},
-];
-
-// URLs are written bare in the card data so they stay readable in the source;
-// turn them into real links at render time rather than hand-writing anchors.
-function linkify(s){
-  return s.replace(/(https?:\/\/[^\s<]+)/g, u=>`<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
-}
-
-function card(c){
-  const tags = (c.tags||[]).map(([cl,t])=>`<span class="tag ${cl}">${t}</span>`).join("");
-  if(c.sec==="wk"){
-    return `<article class="card ${c.ez}" data-ez="${c.ez}">
-      <div class="rail"><span class="num">${c.n}</span><span class="railtxt">${c.rail}</span></div>
-      <div class="body">
-        <h3 class="t">${c.t}</h3>
-        <div class="qs">
-          <div><span class="lab">What I need from you</span><p>${c.need}</p></div>
-          <div><span class="lab">How it'd be shot</span><p>${c.shoot}</p></div>
-        </div>
-      </div></article>`;
-  }
-  const film = (c.film||[]).map(b=>`<li>${b}</li>`).join("");
-  const beats = (c.beats||[]).map(b=>`<li>${b}</li>`).join("");
-  // Verdict + score bar. Kill/Rework must read differently from Shoot at a glance —
-  // the whole point is that he can skip a card without reading it.
-  const vk = (c.verdict||"").toLowerCase().startsWith("kill") ? "kill"
-           : (c.verdict||"").toLowerCase().startsWith("rework") ? "rework"
-           : (c.verdict ? "shoot" : "");
-  const meta = [c.format, c.pov, c.series].filter(Boolean)
-                 .map(x=>`<span class="mtag">${x}</span>`).join("");
-  const verdict = c.verdict ? `<div class="vbar">
-      <span class="vk vk-${vk}">${c.verdict}</span>
-      ${c.ev?`<span class="ev ${c.married?"ev-m":""}">${c.ev}<small>ranking estimate</small></span>`:""}
-      ${c.score?`<span class="vscore">${c.score}<small>/100</small></span>`:""}
-      ${meta?`<span class="mtags">${meta}</span>`:""}
-    </div>` : "";
-  const say = (c.say||[]).map(l=>`<p>${l}</p>`).join("");
-  const watch = (c.watch||[]).map(l=>`<li>${linkify(l)}</li>`).join("");
-  return `<article class="card ${c.ez}" data-ez="${c.ez}">
-    <div class="rail"><span class="num">${c.n}</span><span class="railtxt">${c.rail}</span></div>
-    <div class="body">
-      ${c.pillar?`<div class="pillar">${c.pillar}</div>`:""}${c.evwhy?`<p class="evwhy">${c.married?"\u2605 ":""}${c.evwhy}</p>`:""}
-      <h3 class="t">${c.t}</h3>${tags?`<div class="tags">${tags}</div>`:""}
-      ${watch?`<div class="watch"><span class="lab">▶ Watch these first</span><ul>${watch}</ul></div>`:""}
-      ${verdict}
-      ${c.angle?`<p class="angle">${c.angle}</p>`:""}
-      <div class="fl"><span class="lab">① The hook — word for word</span><p class="one">${c.hook}</p></div>
-      ${c.hook2?`<div class="alts"><span class="lab">or open with this instead</span><p>${c.hook2}</p></div>`:""}
-      ${c.game?`<div class="game"><span class="lab">The game — why they keep watching</span><p>${c.game}</p></div>`:""}
-      ${c.steal?`<div class="steal"><span class="lab">Why anyone gives a damn</span><p>${c.steal}</p></div>`:""}
-      ${c.hist?`<div class="hist"><span class="lab">You've shot this before</span><p>${c.hist}</p></div>`:""}
-      <div><span class="lab">② Film it</span>
-        ${c.howfilm?`<p class="howfilm">${c.howfilm}</p>`:""}
-        <ul class="film">${film}</ul></div>
-      ${beats?`<div class="mid"><span class="lab">③ Beats to hit — not a script</span><ul class="beats">${beats}</ul></div>`:""}
-      ${c.receipt?`<div class="receipt"><span class="lab">The receipt — what proves it</span><p>${c.receipt}</p></div>`:""}
-      ${c.payoff?`<div class="payoff"><span class="lab">The payoff — what happens at the end</span><p>${c.payoff}</p></div>`:""}
-      ${(c.convert||c.travel)?`<div class="ct">
-        ${c.convert?`<div class="c"><span class="lab">Makes it convert</span><p>${c.convert}</p></div>`:""}
-        ${c.travel?`<div class="r"><span class="lab">Makes it travel</span><p>${c.travel}</p></div>`:""}
-      </div>`:""}
-      ${c.engage?`<div class="engage"><span class="lab">Why they comment, send or save it</span><p>${c.engage}</p></div>`:""}
-      ${c.cta?`<div class="cta"><span class="lab">④ One action — that's all</span><p>${c.cta}</p></div>`:""}
-      ${c.promise?`<div class="promise"><span class="lab">Why they want the next one</span><p>${c.promise}</p></div>`:""}
-      ${say?`<div class="say"><span class="lab">🎙 Say this — read it straight</span>${say}</div>`:""}
-      ${c.note?`<p class="note">${c.note}</p>`:""}
-      ${c.risk?`<p class="risk"><b>Biggest risk</b> ${c.risk}</p>`:""}
-      ${c.sbreak?`<p class="sbreak">${c.sbreak}</p>`:""}
-    </div></article>`;
-}
-
-SHOOTPANE.querySelector("#main").innerHTML = SECS.map(s=>{
-  const list = CARDS.filter(c=>c.sec===s.k)
-    .sort((a,b)=>(+b.ev||0)-(+a.ev||0));  // highest expected followers first
-  const inner = `<p class="sdeck">${s.d}</p><div class="stack">${list.map(card).join("")}</div>`;
-  if(s.fold) return `<section data-sec="${s.k}"><details class="fold"><summary>
-      <span class="fh">${s.h}</span><span class="fn">${list.length} edits waiting</span>
-    </summary><div class="foldb">${inner}</div></details></section>`;
-  return `<section data-sec="${s.k}"><h2>${s.h}</h2>${inner}</section>`;
-}).join("");
-
-const btns=[...SHOOTPANE.querySelectorAll(".bar button")], cnt=SHOOTPANE.querySelector("#count");
-function apply(f){
-  btns.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===f)));
-  let n=0;
-  SHOOTPANE.querySelectorAll(".card").forEach(c=>{
-    const on = f==="all" || c.dataset.ez===f;
-    c.style.display = on?"":"none"; if(on) n++;
-  });
-  SHOOTPANE.querySelectorAll("section").forEach(s=>{
-    s.style.display = [...s.querySelectorAll(".card")].some(c=>c.style.display!=="none")?"":"none";
-  });
-  cnt.textContent = n+" cards";
-}
-btns.forEach(b=>b.addEventListener("click",()=>apply(b.dataset.f)));
-apply("all");
-</script></div></div>
-<div class="pane pane-work" id="p-work" role="tabpanel"><div class="wrap">
-<section class="gi">
-  <div class="gi-head">
-    <div><p class="gi-kick">Genius Mode</p><h2>Give me the thought. Get back the shoot.</h2>
-      <p>Tell Codex—or Claude Code on this Mac—<b>Idea: …</b> in your own words. It lands here while I
-      build the hooks, game, proof and filming plan. Once the card is complete, it
-      moves to <b>Shoot</b>.</p></div>
-    <button class="gi-copy" type="button" onclick="copyIdeaPrompt(this)">Copy idea prompt</button>
+</article><article class="ns-card">
+  <div class="ns-rail"><span class="ns-num">02</span><span class="ns-score">90</span></div>
+  <div class="ns-body">
+    <div class="ns-top"><span class="ns-status">Next academy</span></div>
+    <h2>Academy before / after</h2>
+    <p class="ns-why">A result you do not control creates real suspense and believable proof.</p>
+    <div class="ns-hook"><span>Say this first</span><p>&ldquo;He gave us two days. The same swing gets scanned before and after.&rdquo;</p></div>
+    <div class="ns-grid">
+      <div><span class="ns-lab">Film it</span><ul><li>Lock one camera angle, club and framing for both scans.</li><li>Show Day 1 score, a two-beat training montage, then Day 2.</li><li>Let the attendee react before you explain.</li></ul></div>
+      <div><span class="ns-lab">Proof on screen</span><p>PG1 before/after; add one launch-monitor number only if measured the same way.</p></div>
+    </div>
+    <p class="ns-prep"><b>Before filming:</b> Assign one person to protect the identical before/after setup.</p>
+    <p class="ns-risk"><b>Failure mode:</b> Inconsistent framing makes a real change unreadable.</p>
   </div>
-  <div class="gi-grid">
-<article class="gi-card" data-idea-id="GI-0001">
-  <div class="gi-top"><span class="gi-id">GI-0001</span>
-    <span class="gi-progress">10/11 ready</span></div>
-  <h3>If I were 22 and had to make $1M in a year</h3>
-  <p class="gi-raw">I am doing a Reel where I say, &quot;I&#x27;m a nine-figure business owner.&quot; I want a ManyChat automation where someone comments &quot;blueprint&quot; to get a Google Doc. I will share what I read for the Reel and the blueprint I made. I need to make the blueprint better and stronger.</p>
-  <div class="gi-preview"><div><span>Game</span><p>If I had to start over at 22 and make $1M within one year, what is the first thing I would do?</p></div><div><span>Best hook</span><p>&ldquo;If I were 22 and had to make $1 million within a year, this is the first thing I would do. I’m in my 30s and I built a nine-figure company, so I’ve thought a lot about what actually accelerates earning power.&rdquo;</p></div><div><span>Shoot it</span><p>Office, selfie/talking head. Flash 4–5 real bad prospecting DMs with names/photos blurred, then show actual work and results from the proof example when supporting material is available.</p></div></div>
-  <div class="gi-next"><span>What I need next</span><p>What is the current blueprint promised by this reel?</p></div>
-  <p class="gi-meta">Added 2026-09-12 from Brixton, Codex conversation, 2026-09-12</p>
+</article><article class="ns-card">
+  <div class="ns-rail"><span class="ns-num">03</span><span class="ns-score">88</span></div>
+  <div class="ns-body">
+    <div class="ns-top"><span class="ns-status">Shoot this week</span></div>
+    <h2>What I deliberately killed this week</h2>
+    <p class="ns-why">The only everyday-thinking idea with a visible decision, stakes and a measurable result.</p>
+    <div class="ns-hook"><span>Say this first</span><p>&ldquo;Seven things were fighting for this week. I killed six before Monday.&rdquo;</p></div>
+    <div class="ns-grid">
+      <div><span class="ns-lab">Film it</span><ul><li>Open overhead on the seven real priorities.</li><li>Cross out six, circle one and show the hours recovered.</li><li>Finish on what the surviving priority actually produced. 20–30 seconds.</li></ul></div>
+      <div><span class="ns-lab">Proof on screen</span><p>Readable calendar blocks or hours plus the tangible result.</p></div>
+    </div>
+    <p class="ns-prep"><b>Before filming:</b> Use real project names and one measurable outcome; blur only private details.</p>
+    <p class="ns-risk"><b>Failure mode:</b> Vague priorities make it generic productivity advice.</p>
+  </div>
+</article><article class="ns-card">
+  <div class="ns-rail"><span class="ns-num">04</span><span class="ns-score">86</span></div>
+  <div class="ns-body">
+    <div class="ns-top"><span class="ns-status">One fact needed</span></div>
+    <h2>Every coach Tiger ever paid</h2>
+    <p class="ns-why">The access is rare. The value is the surprising answer—not the famous names.</p>
+    <div class="ns-hook"><span>Say this first</span><p>&ldquo;I asked every coach Tiger Woods ever paid the same question. They didn’t agree on one thing.&rdquo;</p></div>
+    <div class="ns-grid">
+      <div><span class="ns-lab">Film it</span><ul><li>Open on the names or call receipts.</li><li>State one question and cut rapidly through the answers.</li><li>Reveal the agreement or disagreement last, then say what it changed for you.</li></ul></div>
+      <div><span class="ns-lab">Proof on screen</span><p>Real call receipts and answer notes or usable audio.</p></div>
+    </div>
+    <p class="ns-prep"><b>Before filming:</b> Write the exact shared finding or disagreement. If they agreed, use the alternate hook in the doc.</p>
+    <p class="ns-risk"><b>Failure mode:</b> Without a viewer-useful finding, it reads as a flex.</p>
+  </div>
 </article></div>
-  <div id="legacy-working-ideas"></div>
 </section></div></div>
 
 <script>
@@ -2054,20 +1422,31 @@ apply("all");
   }catch(e){}
 })();
 (function(){
-  // Move the legacy "one answer needed" cards out of Shoot and into the new
-  // Working Ideas room. The source stays intact; only the rendered placement
-  // changes, so tomorrow's automatic rebuild cannot put the clutter back.
-  var legacy=document.querySelector('#p-shoot section[data-sec="wk"]');
-  var host=document.getElementById('legacy-working-ideas');
-  if(legacy && host){
-    var h=legacy.querySelector('h2');
-    if(h) h.textContent='Ideas waiting on one answer';
-    host.appendChild(legacy);
+  // Keep the first Insights screen decisive. Older measurement detail and edit
+  // queues remain available, but no longer compete with the funnel, lessons,
+  // winning formats and pin decisions.
+  var root=document.querySelector('#p-res .rdash');
+  if(root){
+    var more=document.createElement('details');
+    more.className='ins-more';
+    var sum=document.createElement('summary');
+    sum.textContent='More data, history + edit queues';
+    more.appendChild(sum);
+    Array.prototype.slice.call(root.children).forEach(function(el){
+      var h=el.querySelector && el.querySelector('h2,h3');
+      var title=h ? (h.textContent||'').trim() : '';
+      var oldNumbers=/^(Where the account stands|How to read per 1,000|The last 7 days|What August 2026 taught us|Best clips ever)/.test(title);
+      var editQueue=el.matches && el.matches('.qb');
+      var nestedWeek=el.tagName==='DETAILS';
+      if(oldNumbers||editQueue||nestedWeek) more.appendChild(el);
+    });
+    if(more.children.length>1) root.appendChild(more);
+    else more.remove();
+    var nav=root.querySelector('.bnav');
+    if(nav) Array.prototype.slice.call(nav.querySelectorAll('a')).forEach(function(a){
+      if(a.matches('.nav-mick,[href="#s-num"],[href="#s-best"]')) a.remove();
+    });
   }
-  var oldFilter=document.querySelector('#p-shoot .bar button[data-f="WK"]');
-  if(oldFilter) oldFilter.remove();
-  var count=document.querySelector('#p-shoot #count');
-  if(count) count.textContent=document.querySelectorAll('#p-shoot .card').length+' cards';
 
   var tabs=[].slice.call(document.querySelectorAll('.tab'));
   function show(p){
@@ -2081,19 +1460,7 @@ apply("all");
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.p);});});
   var h=(location.hash||'').replace('#','');
-  if(h==='res'||h==='shoot'||h==='work') show(h);
+  if(h==='res'||h==='shoot') show(h);
+  else if(h==='work') show('shoot');
 })();
-function copyIdeaPrompt(button){
-  var prompt='Idea: ';
-  function done(){
-    var old=button.textContent; button.textContent='Copied — paste into Codex';
-    setTimeout(function(){button.textContent=old;},2200);
-  }
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(prompt).then(done).catch(function(){});
-  } else {
-    var box=document.createElement('textarea'); box.value=prompt; document.body.appendChild(box);
-    box.select(); document.execCommand('copy'); box.remove(); done();
-  }
-}
 </script>
