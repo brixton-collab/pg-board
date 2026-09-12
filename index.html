@@ -26,6 +26,21 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
 .tab.on{color:var(--ink);border-bottom-color:var(--ink)}
 .tab:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .pane{display:none} .pane.on{display:block}
+.pane-work .gi{max-width:1240px;margin:0 auto;padding:0 24px 64px}
+.pane-work .gi-head{display:flex;justify-content:space-between;gap:24px;margin-bottom:24px}
+.pane-work .gi-head h2{margin:6px 0;font-size:28px}
+.pane-work .gi-head p{line-height:1.5;max-width:760px}
+.pane-work .gi-kick,.pane-work .gi-top,.pane-work .gi-meta{color:var(--ink3);font:12px var(--mono)}
+.pane-work .gi-copy{display:none}
+.pane-work .gi-grid{display:grid;gap:20px}
+.pane-work .gi-card{padding:24px;border:1px solid var(--line);border-radius:12px}
+.pane-work .gi-top{display:flex;justify-content:space-between;gap:16px}
+.pane-work .gi-card h3{font-size:24px;margin:14px 0}
+.pane-work .gi-raw{white-space:pre-line;color:var(--ink3);line-height:1.6}
+.pane-work .gi-preview{display:grid;gap:16px;margin:24px 0}
+.pane-work .gi-preview span,.pane-work .gi-next span{font-weight:700}
+.pane-work .gi-preview p,.pane-work .gi-next p{line-height:1.6;margin:6px 0}
+.pane-work .gi-next{border-top:1px solid var(--line);padding-top:18px}
 .system-work{max-width:1240px;margin:40px auto 64px;padding:0 24px;color:var(--ink3)}
 .system-work>summary{cursor:pointer;font:700 13px var(--mono);letter-spacing:.04em;
  border-top:1px solid var(--line);padding:16px 0}
@@ -184,7 +199,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <div class="top">
   <h1>The Board</h1>
   <span class="when"><b id="today">12 September 2026</b>
-    <span class="built" id="built" data-utc="2026-09-12T20:46:54.697770+00:00">built 4:46pm</span></span>
+    <span class="built" id="built" data-utc="2026-09-12T20:47:02.956345+00:00">built 4:47pm</span></span>
 </div>
 
 <style>
@@ -241,6 +256,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <nav class="tabs" role="tablist">
   <button class="tab on" role="tab" aria-selected="true" data-p="res">Insights</button>
   <button class="tab" role="tab" aria-selected="false" data-p="shoot">Shoot</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="work">Working ideas</button>
 </nav>
 
 <div class="pane on pane-res" id="p-res" role="tabpanel"><div class="wrap"><style>.rdash .wrap{max-width:1240px;margin:0 auto;padding:36px 22px 90px;display:flex;flex-direction:column;gap:34px}
@@ -1390,6 +1406,40 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
   </div>
 </article></div>
 </section></div></div>
+<div class="pane pane-work" id="p-work" role="tabpanel">
+<section class="gi">
+  <div class="gi-head">
+    <div><p class="gi-kick">Genius Mode</p><h2>Give me the thought. Get back the shoot.</h2>
+      <p>Tell Codex—or Claude Code on this Mac—<b>Idea: …</b> in your own words. It lands here while I
+      build the hooks, game, proof and filming plan. Once the card is complete, it
+      moves to <b>Shoot</b>.</p></div>
+    <button class="gi-copy" type="button" onclick="copyIdeaPrompt(this)">Copy idea prompt</button>
+  </div>
+  <div class="gi-grid">
+<article class="gi-card" data-idea-id="GI-0002">
+  <div class="gi-top"><span class="gi-id">GI-0002</span>
+    <span class="gi-progress">11/11 ready</span></div>
+  <h3>You’re defending the person you’re trying to outgrow</h3>
+  <p class="gi-raw">Part of becoming your best self is to get rid of that fucking excuse: &quot;Biggest pet peeve, I am not that fucking way.&quot; Part of becoming your best self is to get rid of that fucking excuse: &quot;I wasn&#x27;t a sales guy, I wasn&#x27;t this. This is what I did, blah blah blah.&quot;
+
+Right now there&#x27;s one thing in your life that you know you probably should be doing. I get you, this, but you&#x27;re saying, &quot;I&#x27;m not that fucking way.&quot; You&#x27;re saying that&#x27;s not who you are. It&#x27;s really the difference between people that really fucking, I think, make shit happen as people.
+
+I&#x27;m trying to take this concept into how I can make this a viral reel that would work in the format. Do research and figure out how I can take this concept and put it into a reel with a couple of maybe really good hooks, what to hit on in the body, and how to close to get people to actually want to follow me.</p>
+  <div class="gi-preview"><div><span>Game</span><p>Can your old label survive the evidence? Put “not a sales guy” beside the result of learning sales, then challenge the viewer to take one action their old label would rule out.</p></div><div><span>Best hook</span><p>&ldquo;You’re defending the person you’re trying to outgrow.&rdquo;</p></div><div><span>Shoot it</span><p>One sitting, phone at eye level, close frame. Hold a card reading “NOT A SALES GUY” in the opening frame. Record both hooks, then one body. Insert a tight crop of the ORIGINAL sales leaderboard at the turnaround; show only Brixton’s result. Target 30–38 seconds. The original receipt still needs locating.</p></div></div>
+  <div class="gi-next"><span>What I need next</span><p>Do you still have the original sales leaderboard screenshot showing your turnaround?</p></div>
+  <p class="gi-meta">Added 2026-09-12 from Brixton direct message to Codex, 2026-09-12</p>
+</article>
+<article class="gi-card" data-idea-id="GI-0001">
+  <div class="gi-top"><span class="gi-id">GI-0001</span>
+    <span class="gi-progress">10/11 ready</span></div>
+  <h3>If I were 22 and had to make $1M in a year</h3>
+  <p class="gi-raw">I am doing a Reel where I say, &quot;I&#x27;m a nine-figure business owner.&quot; I want a ManyChat automation where someone comments &quot;blueprint&quot; to get a Google Doc. I will share what I read for the Reel and the blueprint I made. I need to make the blueprint better and stronger.</p>
+  <div class="gi-preview"><div><span>Game</span><p>If I had to start over at 22 and make $1M within one year, what is the first thing I would do?</p></div><div><span>Best hook</span><p>&ldquo;If I were 22 and had to make $1 million within a year, this is the first thing I would do. I’m in my 30s and I built a nine-figure company, so I’ve thought a lot about what actually accelerates earning power.&rdquo;</p></div><div><span>Shoot it</span><p>Office, selfie/talking head. Flash 4–5 real bad prospecting DMs with names/photos blurred, then show actual work and results from the proof example when supporting material is available.</p></div></div>
+  <div class="gi-next"><span>What I need next</span><p>What is the current blueprint promised by this reel?</p></div>
+  <p class="gi-meta">Added 2026-09-12 from Brixton, Codex conversation, 2026-09-12</p>
+</article></div>
+  <div id="legacy-working-ideas"></div>
+</section></div>
 
 <script>
 (function(){
@@ -1463,7 +1513,6 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.p);});});
   var h=(location.hash||'').replace('#','');
-  if(h==='res'||h==='shoot') show(h);
-  else if(h==='work') show('shoot');
+  if(h==='res'||h==='shoot'||h==='work') show(h);
 })();
 </script>
