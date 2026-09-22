@@ -201,7 +201,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <div class="top">
   <h1>The Board</h1>
   <span class="when"><b id="today">22 September 2026</b>
-    <span class="built" id="built" data-utc="2026-09-22T19:58:11.565642+00:00">built 3:58pm</span></span>
+    <span class="built" id="built" data-utc="2026-09-22T20:05:45.323133+00:00">built 4:05pm</span></span>
 </div>
 
 <style>
@@ -1810,16 +1810,6 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
     var fnl=root.querySelector(':scope > section.fnl');
     if(fnl && learned && learned.parentNode===root)
       fnl.insertAdjacentElement('afterend', learned);
-    // "What is working" sits directly under the funnel + what-we-learned pair, so
-    // the one block he reads runs: here is the gap → here is what we learned →
-    // here is what worked and what did not. (2026-09-22)
-    (function(){
-      var host=document.querySelector('#p-res .wb-host');
-      var wb=host && host.querySelector('section.wb');
-      if(!wb || !learned || learned.parentNode!==root) return;
-      learned.insertAdjacentElement('afterend', wb);
-      if(host && !host.children.length) host.remove();
-    })();
     // The dropdown sits directly under "What we learned lately", not at the end.
     // Brixton: "I want that to go in the slot on the board right below the What We
     // Learned Lately section."
@@ -1837,6 +1827,16 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
       if(!pf) return;
       var after=(more && more.parentNode===root) ? more : learned;
       if(after && after.parentNode===root) after.insertAdjacentElement('afterend', pf);
+    })();
+    // "What is working" sits directly under the funnel + what-we-learned pair, so
+    // the one block he reads runs: here is the gap → here is what we learned →
+    // here is what worked and what did not. (2026-09-22)
+    (function(){
+      var host=document.querySelector('#p-res .wb-host');
+      var wb=host && host.querySelector('section.wb');
+      if(!wb || !learned || learned.parentNode!==root) return;
+      learned.insertAdjacentElement('afterend', wb);
+      if(host && !host.children.length) host.remove();
     })();
     // THE BOTTOM OF INSIGHTS, in his order (2026-09-22): "Mick's today's 3 cuts
     // should go to the very very bottom of the Insights board. That goes just
