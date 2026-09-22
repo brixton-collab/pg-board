@@ -1,0 +1,208 @@
+<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The Board v2 — the 500K scoreboard</title>
+<style>
+:root{--bg:#FBFBF8;--panel:#fff;--ink:#14181A;--ink2:#5A646A;--ink3:#8B959A;
+ --line:#E2E4DF;--win:#1E7F52;--win-bg:#E8F5ED;--mick:#8A5A00;--mick-bg:#FBF1DC;
+ --brix:#1F5E8C;--brix-bg:#E6F0F8;--dead:#8B959A;--dead-bg:#F1F2EF;--hot:#B23B2E;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+ --bg:#0E1113;--panel:#161A1C;--ink:#ECEFF0;--ink2:#AFB8BC;--ink3:#7E888D;
+ --line:#242A2D;--win:#69BE8C;--win-bg:#152520;--mick:#D6A845;--mick-bg:#2A2416;
+ --brix:#8FB8D6;--brix-bg:#16222B;--dead:#7E888D;--dead-bg:#1A1F22;--hot:#E08574}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+ -webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px}
+.top{padding:40px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+.top h1{font-size:20px;font-weight:600;margin:0;color:var(--ink3);letter-spacing:-.01em}
+.top .when{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink3)}
+.v2{background:var(--hot);color:#fff;font:700 10px var(--mono);letter-spacing:.1em;
+ padding:3px 7px;border-radius:4px}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;
+ color:var(--ink3);margin:54px 0 4px;font-weight:700}
+h2 + .sub{color:var(--ink2);font-size:14px;margin:0 0 20px;max-width:62ch}
+/* ── 1. ARE WE ON PACE ── */
+.pace{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+ padding:26px 28px;margin-top:14px}
+.pace-lead{font-size:clamp(28px,5.2vw,44px);font-weight:700;letter-spacing:-.03em;
+ line-height:1.12;margin:0 0 8px}
+.pace-lead .n{font-variant-numeric:tabular-nums}
+.on{color:var(--win)} .off{color:var(--hot)}
+.pace-why{color:var(--ink2);font-size:15px;margin:0;max-width:64ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;
+ background:var(--line);border:1px solid var(--line);border-radius:12px;
+ overflow:hidden;margin-top:22px}
+.cell{background:var(--panel);padding:16px 18px}
+.cell .l{font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+ color:var(--ink3);display:block}
+.cell .v{font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+ display:block;margin:4px 0 2px}
+.cell .n{font-size:12.5px;color:var(--ink2);display:block}
+/* ── the weekly winner bars ── */
+.weeks{margin-top:26px;border-top:1px solid var(--line);padding-top:20px}
+.wk{display:grid;grid-template-columns:96px 1fr 128px;gap:14px;align-items:center;
+ padding:7px 0;font-size:13px}
+.wk .wd{font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
+.wk .bar{height:22px;background:var(--dead-bg);border-radius:5px;position:relative;
+ overflow:hidden}
+.wk .bar i{position:absolute;inset:0 auto 0 0;background:var(--win);opacity:.85;
+ display:block;border-radius:5px}
+.wk .bar b{position:absolute;left:9px;top:0;line-height:22px;font-size:11.5px;
+ font-weight:700;color:var(--ink);mix-blend-mode:normal}
+.wk .wf{font-family:var(--mono);font-size:12px;color:var(--ink2);text-align:right}
+.wk.hit .wd{color:var(--win);font-weight:700}
+/* ── 2 + 3. cards ── */
+.cards{display:grid;gap:12px;margin-top:8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+ padding:18px 20px;display:grid;grid-template-columns:1fr 210px;gap:18px}
+.card .who{font:700 10px var(--mono);letter-spacing:.1em;padding:3px 8px;border-radius:5px;
+ display:inline-block}
+.w-win{background:var(--win-bg);color:var(--win)}
+.w-mick{background:var(--mick-bg);color:var(--mick)}
+.w-brix{background:var(--brix-bg);color:var(--brix)}
+.w-none{background:var(--dead-bg);color:var(--dead)}
+.card h3{font-size:15px;margin:9px 0 6px;font-weight:600;line-height:1.35}
+.card h3 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+.card .verdict{font-size:14px;color:var(--ink);margin:0 0 3px;font-weight:600}
+.card .action{font-size:14px;color:var(--ink2);margin:0}
+.card .nums{border-left:1px solid var(--line);padding-left:18px;font-family:var(--mono);
+ font-size:12px;color:var(--ink2);display:grid;gap:5px;align-content:start}
+.card .nums b{color:var(--ink);font-size:15px}
+.grp{margin-top:30px}
+.grp-h{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.grp-h strong{font-size:16px}
+.grp-h span{font-size:13px;color:var(--ink3)}
+details.more{margin-top:34px;border-top:1px solid var(--line);padding-top:14px}
+details.more summary{cursor:pointer;font:700 11px var(--mono);letter-spacing:.08em;
+ text-transform:uppercase;color:var(--ink3)}
+.note{font-size:13px;color:var(--ink3);margin-top:10px;max-width:70ch}
+.foot{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;
+ font-size:12.5px;color:var(--ink3)}
+@media(max-width:640px){.card{grid-template-columns:1fr}
+ .card .nums{border-left:0;border-top:1px solid var(--line);padding:12px 0 0;
+  grid-template-columns:repeat(3,1fr)}
+ .wk{grid-template-columns:76px 1fr;}.wk .wf{grid-column:2;text-align:left}}
+</style>
+<div class="wrap">
+  <div class="top"><h1>The Board</h1><span class="v2">V2 · DRAFT</span>
+    <span class="when">built 22 sep, 12:37pm · for feedback, the live board is unchanged</span></div>
+  <style>
+.ghead .pw-cad{margin:0 0 12px;padding:12px 16px;border:1px solid var(--line);
+ border-radius:10px;background:var(--bg);font-size:14.5px;line-height:1.5}
+.ghead .pw-cad-bad{border-color:#b42318;background:rgba(180,35,24,.10)}
+
+.ghead .pw-n{width:104px}
+.ghead .pw-avg{display:block;font-size:10.5px;font-weight:400;color:var(--ink3);
+ letter-spacing:0;margin-top:1px}
+
+.ghead .pw-drought{margin:0 0 16px;padding:12px 16px;border:1px solid var(--line);
+ border-radius:10px;background:var(--bg);font-size:14.5px;line-height:1.5}
+.ghead .pw-drought a{color:inherit}
+.ghead .pw-drought.pw-dry{border-color:#b45309}
+
+.ghead .pw-warn{color:var(--ink3);font-size:13px}
+
+.ghead .gh-grid-3{grid-template-columns:repeat(3,1fr)}
+
+.ghead .pw-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 12px}
+@media(max-width:760px){.ghead .pw-wrap{grid-template-columns:1fr}}
+.ghead .pw-wrap .pw{margin:0}
+.ghead .pw-r{opacity:.42}
+.ghead .pw-notes{margin:0 0 16px}
+
+/* the plain-English week strip (2026-09-21) — "I need to make this board a little
+   more in layman's terms" */
+.ghead .pw{margin:0 0 16px;padding:14px 16px;border:1px solid var(--line);
+ border-radius:10px;background:var(--bg)}
+.ghead .pw-h{margin:0 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.11em;
+ text-transform:uppercase;color:var(--ink3)}
+.ghead .pw-t{width:100%;border-collapse:collapse}
+.ghead .pw-t td{padding:3px 0;vertical-align:middle}
+.ghead .pw-d{width:62px;font-family:var(--mono);font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.ghead .pw-b{padding-right:12px!important}
+.ghead .pw-b span{display:block;height:11px;border-radius:3px;background:currentColor;opacity:.75}
+.ghead .pw-n{width:70px;text-align:right;font-family:var(--mono);font-size:13px;
+ font-weight:600;white-space:nowrap}
+.ghead .pw-l{margin:10px 0 0;font-size:14.5px;line-height:1.55}
+.ghead .pw-l b{font-weight:700}
+
+.ghead{max-width:1240px;margin:18px auto 0;padding:0 24px}
+.ghead .gh-in{border:1px solid var(--line);border-radius:14px;padding:20px 22px 18px;
+ background:var(--hair)}
+.ghead .gh-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+ margin:0 0 16px}
+.ghead .gh-now{font-size:31px;font-weight:650;letter-spacing:-.03em;line-height:1}
+.ghead .gh-now small{font-size:13px;font-weight:600;color:var(--ink3);margin-left:7px;
+ letter-spacing:-.01em}
+.ghead .gh-win{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--ink3);margin-left:auto}
+.ghead .gh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+ background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ghead .gc{background:var(--bg);padding:14px 15px 13px;min-width:0}
+.ghead .gl{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.11em;
+ text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.ghead .gv{display:block;font-size:27px;font-weight:650;letter-spacing:-.03em;
+ line-height:1.05}
+.ghead .gv small{font-size:12.5px;font-weight:600;color:var(--ink3);margin-left:4px;
+ letter-spacing:-.01em}
+.ghead .gn{display:block;font-size:12px;line-height:1.45;color:var(--ink3);margin-top:7px}
+.ghead .up{color:#1F6B45;font-weight:650}
+.ghead .down{color:#9C3A2C;font-weight:650}
+.ghead .gh-verdict{margin:15px 0 0;font-size:14.5px;line-height:1.5}
+.ghead .gh-verdict b{font-weight:650}
+.ghead .pill{display:inline-block;font-family:var(--mono);font-size:10px;
+ letter-spacing:.11em;text-transform:uppercase;padding:3px 8px;border-radius:5px;
+ margin-right:9px;vertical-align:1px}
+.ghead .pill.ok{background:#E7F1EA;color:#1F6B45}
+.ghead .pill.no{background:#F7E7E3;color:#9C3A2C}
+.ghead details{margin:13px 0 0}
+.ghead summary{font-size:12px;color:var(--ink3);cursor:pointer}
+.ghead details p{font-size:12.5px;line-height:1.55;color:var(--ink3);margin:9px 0 0}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ghead .pill.ok{
+ background:#152520;color:#69BE8C}
+ :root:not([data-theme=light]) .ghead .pill.no{background:#2C1A17;color:#E08574}
+ :root:not([data-theme=light]) .ghead .up{color:#69BE8C}
+ :root:not([data-theme=light]) .ghead .down{color:#E08574}}
+:root[data-theme=dark] .ghead .pill.ok{background:#152520;color:#69BE8C}
+:root[data-theme=dark] .ghead .pill.no{background:#2C1A17;color:#E08574}
+:root[data-theme=dark] .ghead .up{color:#69BE8C}
+:root[data-theme=dark] .ghead .down{color:#E08574}
+@media(max-width:860px){.ghead .gh-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.ghead{padding:0 18px}.ghead .gh-grid{grid-template-columns:1fr}
+ .ghead .gh-win{margin-left:0;width:100%}}
+@media print{.ghead .gh-in{background:none}}
+</style><section class="ghead"><div class="gh-in"><div class="gh-top"><span class="gh-now">27,244<small>followers now</small></span><span class="gh-now" style="font-size:15px;font-weight:600;color:var(--ink3)">22,756 to go</span><span class="gh-win">week of 9/15–9/22</span></div><div class="pw-wrap"><div class="pw"><p class="pw-h">Followers gained, week by week</p><table class="pw-t"><tr><td class="pw-d">18 Aug</td><td class="pw-b"><span class="" style="width:8%"></span></td><td class="pw-n">180<span class="pw-avg">26/day</span></td></tr><tr><td class="pw-d">25 Aug</td><td class="pw-b"><span class="" style="width:77%"></span></td><td class="pw-n">1,799<span class="pw-avg">257/day</span></td></tr><tr><td class="pw-d">1 Sep</td><td class="pw-b"><span class="" style="width:47%"></span></td><td class="pw-n">1,094<span class="pw-avg">156/day</span></td></tr><tr><td class="pw-d">8 Sep</td><td class="pw-b"><span class="" style="width:100%"></span></td><td class="pw-n">2,344<span class="pw-avg">335/day</span></td></tr><tr><td class="pw-d">15 Sep</td><td class="pw-b"><span class="" style="width:24%"></span></td><td class="pw-n">568<span class="pw-avg">81/day</span></td></tr><tr><td class="pw-d">22 Sep</td><td class="pw-b"><span class="" style="width:30%"></span></td><td class="pw-n">703<span class="pw-avg">100/day</span></td></tr></table></div><div class="pw"><p class="pw-h">People who saw a clip, week by week</p><table class="pw-t"><tr><td class="pw-d">18 Aug</td><td class="pw-b"><span class="pw-r" style="width:59%"></span></td><td class="pw-n">271,810<span class="pw-avg">38,830/day</span></td></tr><tr><td class="pw-d">25 Aug</td><td class="pw-b"><span class="pw-r" style="width:90%"></span></td><td class="pw-n">416,221<span class="pw-avg">59,460/day</span></td></tr><tr><td class="pw-d">1 Sep</td><td class="pw-b"><span class="pw-r" style="width:100%"></span></td><td class="pw-n">464,309<span class="pw-avg">66,330/day</span></td></tr><tr><td class="pw-d">8 Sep</td><td class="pw-b"><span class="pw-r" style="width:81%"></span></td><td class="pw-n">377,654<span class="pw-avg">53,951/day</span></td></tr><tr><td class="pw-d">15 Sep</td><td class="pw-b"><span class="pw-r" style="width:63%"></span></td><td class="pw-n">292,536<span class="pw-avg">41,791/day</span></td></tr><tr><td class="pw-d">22 Sep</td><td class="pw-b"><span class="pw-r" style="width:68%"></span></td><td class="pw-n">315,510<span class="pw-avg">45,073/day</span></td></tr></table></div></div><p class="pw-cad"><b>22 clips</b> went out in the last 7 days — 3.1 a day. The board can see all of them.</p><details class='pw-drought'><summary><b>22 clips went out in the last 7 days. 4 reached 10,000+ people.</b> <span class='pw-sm'>open to see which</span></summary><ul class='pw-big'><li><b>97,295</b> saw <a href="https://www.instagram.com/reel/DdcjqfKDXW7/" target="_blank" rel="noopener">I walked up to a golfer and gave him probably the weirdest…</a> <span class='pw-sm'>· 0.51 per 1,000 followed</span></li><li><b>72,022</b> saw <a href="https://www.instagram.com/reel/DdkA4x8iLXB/" target="_blank" rel="noopener">I walked up to Chris Ogle with one simple challenge:  Hum …</a> <span class='pw-sm'>· 0.19 per 1,000 followed</span></li><li><b>33,293</b> saw <a href="https://www.instagram.com/reel/DdaNwhlFWnN/" target="_blank" rel="noopener">If you only had one hour a week to practice golf, how woul…</a> <span class='pw-sm'>· 1.98 per 1,000 followed</span></li><li><b>19,588</b> saw <a href="https://www.instagram.com/reel/Ddhu9oUDbC2/" target="_blank" rel="noopener">I gave a beginner golfer one incredibly simple challenge: …</a> <span class='pw-sm'>· 1.28 per 1,000 followed</span></li></ul></details><div class="gh-grid gh-grid-3"><div class="gc"><span class="gl">Visibility</span><span class="gv">343,831</span><span class="gn">people saw a clip this week<br><span class="up">▲ 9%</span> vs the week before (316,094)</span></div><div class="gc"><span class="gl">Per day</span><span class="gv">+100<small>/day</small></span><span class="gn">what we are adding every day right now</span></div><div class="gc"><span class="gl">Pace for 50,000</span><span class="gv">228<small>/day needed</small></span><span class="gn">to hit 50,000 by 31 Dec 2026 &middot; 100 days left<br>we are at 100 &mdash; <span class="down">-127/day short</span></span></div></div><p class="gh-verdict"><span class="pill no">Behind</span>At this rate the account lands at about <b>37,287</b> on 31 December 2026 &mdash; <b>12,713 short.</b> It takes <b>228 a day</b> to get there.</p></div></section>
+
+  <h2>1 · Are we on pace?</h2>
+  <p class="sub">One question, one number. Not a rate — rates can look fine while the
+     account stands still.</p>
+  <div class="pace"><p class="pace-lead">You need <span class="n">4</span> clips a week that bring <span class="n">100+</span> followers each.<br>This week you made <span class="n off">0</span>.</p><p class="pace-why">9 clips out of 177 measured have ever cleared 100 followers. They produced <b>4,921 of your 5,806 followers — 85% of everything this account has gained.</b> Nothing else has moved the number. Volume has not: your biggest posting week made 18 clips and gained 14 followers.</p><p class="pace-why" style="margin-top:10px">A winner is worth about <b>547 followers</b> on this account, which is why the target is 4 a week. Your best week in the last 8 got 3, so this is a stretch from where you are, not a repeat of it.</p><div class="grid"><div class="cell"><span class="l">Followers now</span><span class="v">27,244</span><span class="n">scraped 2026-09-22</span></div><div class="cell"><span class="l">Gained this week</span><span class="v">+958</span><span class="n">500K pace needs +2,177</span></div><div class="cell"><span class="l">Weekly pace needed</span><span class="v">8.0%</span><span class="n">38 weeks to Jun 2027</span></div><div class="cell"><span class="l">A clip clears the bar at</span><span class="v">100</span><span class="n">followers · 30,000 reached x 3 per 1,000</span></div></div><div class="weeks"><p class="note" style="margin:0 0 10px">Winners per week, last 8 weeks. The weeks that hit 4 are the only weeks that moved the account.</p><div class="wk"><span class="wd">21 Sep</span><span class="bar"><i style="width:0%"></i><b>0 winners · 4 clips</b></span><span class="wf">25 followers</span></div><div class="wk"><span class="wd">14 Sep</span><span class="bar"><i style="width:0%"></i><b>0 winners · 13 clips</b></span><span class="wf">171 followers</span></div><div class="wk"><span class="wd">7 Sep</span><span class="bar"><i style="width:25%"></i><b>1 winner · 14 clips</b></span><span class="wf">232 followers</span></div><div class="wk"><span class="wd">31 Aug</span><span class="bar"><i style="width:75%"></i><b>3 winners · 23 clips</b></span><span class="wf">2,216 followers</span></div><div class="wk"><span class="wd">24 Aug</span><span class="bar"><i style="width:25%"></i><b>1 winner · 19 clips</b></span><span class="wf">230 followers</span></div><div class="wk"><span class="wd">17 Aug</span><span class="bar"><i style="width:75%"></i><b>3 winners · 16 clips</b></span><span class="wf">1,972 followers</span></div><div class="wk"><span class="wd">10 Aug</span><span class="bar"><i style="width:0%"></i><b>0 winners · 13 clips</b></span><span class="wf">25 followers</span></div><div class="wk"><span class="wd">3 Aug</span><span class="bar"><i style="width:0%"></i><b>0 winners · 16 clips</b></span><span class="wf">19 followers</span></div><div class="wk"><span class="wd">27 Jul</span><span class="bar"><i style="width:0%"></i><b>0 winners · 18 clips</b></span><span class="wf">14 followers</span></div></div></div>
+
+  <h2>2 · What worked</h2>
+  <p class="sub">Every one of these cleared 100 followers. Copy the SHAPE, not the topic.</p>
+  <div class="cards"><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/Dct9lVuq8ys/" target="_blank" rel="noopener">Your hum breaks in the exact spot your swing does.  I stopped a new golfer on ht…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>1,109</b> followers</span><span>213,829 reached</span><span>5.19 per 1,000</span><span>2026-08-31</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DcRScqMKFat/" target="_blank" rel="noopener">I’m building a hum-tracker to help manage tension in the golf swing, watch me te…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>873</b> followers</span><span>49,109 reached</span><span>17.78 per 1,000</span><span>2026-08-20</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DcOuSd_K0dJ/" target="_blank" rel="noopener">I love to experiment. AND, I love helping people discover ways to get better at …</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>826</b> followers</span><span>38,374 reached</span><span>21.52 per 1,000</span><span>2026-08-19</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DczEOu_qWhO/" target="_blank" rel="noopener">I hum out loud over the ball. On purpose.  Tension is what wrecks your swing, an…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>554</b> followers</span><span>119,765 reached</span><span>4.63 per 1,000</span><span>2026-09-02</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DcyVB1ctmvL/" target="_blank" rel="noopener">Watch me approach a beginner golfer and show her a unique way to stripe it witho…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>308</b> followers</span><span>81,663 reached</span><span>3.77 per 1,000</span><span>2026-09-02</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DcI8iVpqydE/" target="_blank" rel="noopener">One weird tip and a 17 handicap striped it: hum through the entire swing.  He lo…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>184</b> followers</span><span>86,786 reached</span><span>2.12 per 1,000</span><span>2026-08-17</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DdM2KytKA-W/" target="_blank" rel="noopener">I played golf with one of the oldest scratch golfers in the world.  Her game is …</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>152</b> followers</span><span>188,983 reached</span><span>0.80 per 1,000</span><span>2026-09-12</span></div></div><div class="card"><div><span class="who w-win">BRIXTON + MICK</span><h3><a href="https://www.instagram.com/reel/DckLoJBN3Zb/" target="_blank" rel="noopener">$200 for plastic clubs!? See what the Lil Legends Clubs are actually made of and…</a></h3><p class="verdict">Did both jobs</p><p class="action">Make another one now, same shape</p></div><div class="nums"><span><b>147</b> followers</span><span>107,244 reached</span><span>1.37 per 1,000</span><span>2026-08-28</span></div></div></div>
+
+  <h2>3 · What we do next</h2>
+  <p class="sub">Every clip from the last 3 weeks that missed 100 followers, in one of
+     three boxes. Each box has one owner and one action. If a clip is not here, it did
+     neither job and it is in the archive at the bottom.</p>
+  <div class="grp"><div class="grp-h"><strong>Mick — recut the last line</strong><span>3 clips</span></div><p class="note" style="margin:0 0 10px">These travelled. The footage is proven, so this is an edit, not a shoot.</p><div class="cards"><div class="card"><div><span class="who w-mick">MICK</span><h3><a href="https://www.instagram.com/reel/DdcjqfKDXW7/" target="_blank" rel="noopener">I walked up to a golfer and gave him probably the weirdest swing tip he’s ever h…</a></h3><p class="verdict">Travelled — the ending lost them</p><p class="action">Recut the last line. Do NOT reshoot — the footage works</p></div><div class="nums"><span><b>50</b> followers</span><span>97,295 reached</span><span>0.51 per 1,000</span><span>2026-09-18</span></div></div><div class="card"><div><span class="who w-mick">MICK</span><h3><a href="https://www.instagram.com/reel/DdkA4x8iLXB/" target="_blank" rel="noopener">I walked up to Chris Ogle with one simple challenge:  Hum while you swing.  It g…</a></h3><p class="verdict">Travelled — the ending lost them</p><p class="action">Recut the last line. Do NOT reshoot — the footage works</p></div><div class="nums"><span><b>14</b> followers</span><span>72,022 reached</span><span>0.19 per 1,000</span><span>2026-09-21</span></div></div><div class="card"><div><span class="who w-mick">MICK</span><h3><a href="https://www.instagram.com/reel/DdaNwhlFWnN/" target="_blank" rel="noopener">If you only had one hour a week to practice golf, how would you spend it? I aske…</a></h3><p class="verdict">Travelled — the ending lost them</p><p class="action">Recut the last line. Do NOT reshoot — the footage works</p></div><div class="nums"><span><b>66</b> followers</span><span>33,293 reached</span><span>1.98 per 1,000</span><span>2026-09-18</span></div></div></div></div><div class="grp"><div class="grp-h"><strong>Brixton — shoot it again, bigger</strong><span>5 clips</span></div><p class="note" style="margin:0 0 10px">These converted. Nobody saw them. Put another person in it.</p><div class="cards"><div class="card"><div><span class="who w-brix">BRIXTON</span><h3><a href="https://www.instagram.com/reel/Dcv8o7jtPMx/" target="_blank" rel="noopener">Imagine playing golf with no tension. Try this one tip to reduce your tension an…</a></h3><p class="verdict">Converts — nobody saw it</p><p class="action">Shoot it again with another person in it</p></div><div class="nums"><span><b>87</b> followers</span><span>13,787 reached</span><span>6.31 per 1,000</span><span>2026-09-01</span></div></div><div class="card"><div><span class="who w-brix">BRIXTON</span><h3><a href="https://www.instagram.com/reel/Dc1wCDgTdtB/" target="_blank" rel="noopener">New free tool detects your tension point?  Imagine if there was a simple way to …</a></h3><p class="verdict">Converts — nobody saw it</p><p class="action">Shoot it again with another person in it</p></div><div class="nums"><span><b>81</b> followers</span><span>9,602 reached</span><span>8.44 per 1,000</span><span>2026-09-03</span></div></div><div class="card"><div><span class="who w-brix">BRIXTON</span><h3><a href="https://www.instagram.com/reel/DdFEkBSqVKM/" target="_blank" rel="noopener">I&#x27;m a +1 with one hour a week to practice, and I want to get to +4.  So I&#x27;m buil…</a></h3><p class="verdict">Converts — nobody saw it</p><p class="action">Shoot it again with another person in it</p></div><div class="nums"><span><b>32</b> followers</span><span>4,785 reached</span><span>6.69 per 1,000</span><span>2026-09-09</span></div></div><div class="card"><div><span class="who w-brix">BRIXTON</span><h3><a href="https://www.instagram.com/reel/DdHWX--qYg5/" target="_blank" rel="noopener">In life, you have to go for it.  I saw Steph Curry and knew exactly what I was g…</a></h3><p class="verdict">Converts — nobody saw it</p><p class="action">Shoot it again with another person in it</p></div><div class="nums"><span><b>7</b> followers</span><span>2,138 reached</span><span>3.27 per 1,000</span><span>2026-09-10</span></div></div><div class="card"><div><span class="who w-brix">BRIXTON</span><h3><a href="https://www.instagram.com/reel/DdcpYORCQLi/" target="_blank" rel="noopener">Everyone&#x27;s got a favorite Tour Pro swing and tries to copy it.  Nobody can see w…</a></h3><p class="verdict">Converts — nobody saw it</p><p class="action">Shoot it again with another person in it</p></div><div class="nums"><span><b>3</b> followers</span><span>739 reached</span><span>4.06 per 1,000</span><span>2026-09-18</span></div></div></div></div><details class="more"><summary>Archive — 41 clips that did neither job</summary><div class="cards" style="margin-top:14px"><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Ddhu9oUDbC2/" target="_blank" rel="noopener">I gave a beginner golfer one incredibly simple challenge:  Hum while you swing. …</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>25</b> followers</span><span>19,588 reached</span><span>1.28 per 1,000</span><span>2026-09-20</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc9b0DzqmSN/" target="_blank" rel="noopener">The world’s best blind golfer showed me 2 incredible ways to detect tension in y…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>5</b> followers</span><span>18,820 reached</span><span>0.27 per 1,000</span><span>2026-09-06</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdKLC0NqqNQ/" target="_blank" rel="noopener">DOD King, @cvagolf’s swing didn’t need another technical change.  I asked him to…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>17,319 reached</span><span>0.17 per 1,000</span><span>2026-09-11</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdCrRU9KQnz/" target="_blank" rel="noopener">I gave Davante Adams one swing tip at Tahoe. Watch his hum crack at first.  Wher…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>15</b> followers</span><span>10,519 reached</span><span>1.43 per 1,000</span><span>2026-09-08</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc1xvBNK5m9/" target="_blank" rel="noopener">I got @cvagolf to hum out loud over the ball - no swing thoughts, no mechanics, …</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>13</b> followers</span><span>10,017 reached</span><span>1.30 per 1,000</span><span>2026-09-03</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc9bimOKUBS/" target="_blank" rel="noopener">She was slicing every shot. I never touched her grip, her stance, or her swing. …</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>8</b> followers</span><span>9,922 reached</span><span>0.81 per 1,000</span><span>2026-09-06</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc4OpV2qGYf/" target="_blank" rel="noopener">I walked up to a total stranger on the range — a 17 handicap grinding away at hi…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>13</b> followers</span><span>9,738 reached</span><span>1.33 per 1,000</span><span>2026-09-04</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdVFaOxAjx5/" target="_blank" rel="noopener">The world’s best blind golfer showed me two incredible ways to detect tension in…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>5</b> followers</span><span>8,134 reached</span><span>0.61 per 1,000</span><span>2026-09-16</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdQA3AJqe9x/" target="_blank" rel="noopener">Driver’s blind folded, balls only out of divots. Only chip off greens  I only ha…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>7,008 reached</span><span>0.43 per 1,000</span><span>2026-09-14</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdXCPbSqCl6/" target="_blank" rel="noopener">9 holes at GROVE XXIII in 90 seconds.</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>5,061 reached</span><span>0.59 per 1,000</span><span>2026-09-16</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc6yoxOqJzp/" target="_blank" rel="noopener">I was never a car guy. I&#x27;m just a big believer in delayed gratification, so I dr…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>1</b> followers</span><span>5,014 reached</span><span>0.20 per 1,000</span><span>2026-09-05</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc_p-mdKIqY/" target="_blank" rel="noopener">I gave Davante Adams one swing tip at Tahoe. Watch his hum crack at first.  Wher…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>5</b> followers</span><span>4,064 reached</span><span>1.23 per 1,000</span><span>2026-09-07</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdHUtoEq3vz/" target="_blank" rel="noopener">I&#x27;m a +1 trying to get to +4 on one hour of practice a week.  I run a company. T…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>2</b> followers</span><span>4,039 reached</span><span>0.50 per 1,000</span><span>2026-09-10</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Dc1yR9HKPKL/" target="_blank" rel="noopener">The world&#x27;s best blind golfer showed me a tension detector I already had.  Hum t…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>4</b> followers</span><span>3,589 reached</span><span>1.11 per 1,000</span><span>2026-09-03</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdhfWyTvbXt/" target="_blank" rel="noopener">Can I make a birdie with all 14 clubs in the bag!? The challenge is I must play …</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>3,536 reached</span><span>0.85 per 1,000</span><span>2026-09-20</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdXVf5djMIw/" target="_blank" rel="noopener">I gave NFL quarterback Ryan Fitzpatrick one strange golf tip.  Listen to where h…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>3,487 reached</span><span>0.86 per 1,000</span><span>2026-09-16</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/Ddjth4zxArr/" target="_blank" rel="noopener">Some days I flow. But often I play too tense and tight. So I found a new cheat c…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>6</b> followers</span><span>3,334 reached</span><span>1.80 per 1,000</span><span>2026-09-21</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdCqAvKKYLO/" target="_blank" rel="noopener">Your practice swing is your best swing. The only thing that changed is the ball.…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>3,204 reached</span><span>0.94 per 1,000</span><span>2026-09-08</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdKPdWpKY2P/" target="_blank" rel="noopener">The world’s best blind golfer taught me something I couldn’t see in my own swing…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>3</b> followers</span><span>3,192 reached</span><span>0.94 per 1,000</span><span>2026-09-11</span></div></div><div class="card"><div><span class="who w-none">—</span><h3><a href="https://www.instagram.com/reel/DdfkoqaoCkT/" target="_blank" rel="noopener">I’m a +1 trying to get to +4 with only one hour a week to practice.  I’m testing…</a></h3><p class="verdict">Neither</p><p class="action">Archive it. Nothing to fix here</p></div><div class="nums"><span><b>6</b> followers</span><span>3,182 reached</span><span>1.89 per 1,000</span><span>2026-09-20</span></div></div></div></details>
+
+  <div class="foot">
+    <p><b>How a clip is judged.</b> A winner brings 100+ followers. If it missed,
+    two bars say why and therefore who fixes it: did 30,000 people see it,
+    and did 3 in every 1,000 follow. Reach is bought by the opening and by
+    having another person in the clip. Follows are bought by the last line.</p>
+    <p><b>What this board cannot tell you.</b> 24 clips have no follower
+    reading from Instagram at all — they are not failures, they are unmeasured, and
+    they are left out of every count above rather than scored as zero.</p>
+    <p><b>Why the bar is where it is.</b> 500,000 by June 2027 needs
+    8.0% growth every week from here. At 27,244 followers that is
+    2,177 people a week, and at ~547 followers a winner that
+    is 4 winning clips a week. The bar rises on its own as the account
+    grows: at 100,000 followers the same curve asks for 15 a week.</p>
+  </div>
+</div>
