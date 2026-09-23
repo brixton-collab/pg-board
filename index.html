@@ -201,7 +201,7 @@ text-transform:none;letter-spacing:0;margin-top:2px}.pane-res .lrn-theme{display
 <div class="top">
   <h1>The Board</h1>
   <span class="when"><b id="today">22 September 2026</b>
-    <span class="built" id="built" data-utc="2026-09-23T00:37:37.381650+00:00">built 8:37pm</span></span>
+    <span class="built" id="built" data-utc="2026-09-23T00:44:18.393478+00:00">built 8:44pm</span></span>
 </div>
 
 <style>
@@ -1834,7 +1834,11 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
       // the thing he objected to is gone without taking the section with it.
       // ⛔ Do not delete a whole section again to fix what is wrong inside it.
       if(/^(What August 2026 taught us)/.test(title)){ el.remove(); return; }
-      var oldNumbers=/^(Where the account stands|How to read per 1,000|Best clips ever)/.test(title);
+      // "Best clips ever" is NOT swept into the drawer any more — he asked for it
+      // on the surface: "your best all-time clips should go at the bottom of the
+      // insights board." Bottom means visible at the bottom, not hidden inside a
+      // dropdown that happens to sit near it. (2026-09-22, third Loom)
+      var oldNumbers=/^(Where the account stands|How to read per 1,000)/.test(title);
       // the recent-clips list stays on the surface, not inside the dropdown
       if(/^The last 7 days/.test(title)) oldNumbers=false;
       // "What I'm cutting tonight" (.qb) is NOT swept into the dropdown any more —
@@ -1911,8 +1915,14 @@ border-bottom:1px solid var(--hpline);white-space:nowrap}
         var h=el.querySelector && el.querySelector('h2');
         if(h && /^Best clips ever/.test((h.textContent||'').trim())) best=el;
       });
+      var wk=null;
+      Array.prototype.slice.call(root.children).forEach(function(el){
+        var h=el.querySelector && el.querySelector('h2');
+        if(h && /^The last 7 days/.test((h.textContent||'').trim())) wk=el;
+      });
       if(lb) moveAfter(lb, pf || lb.previousElementSibling);
-      if(best) moveAfter(best, lb || pf);
+      if(wk) moveAfter(wk, lb || pf);
+      if(best) moveAfter(best, wk || lb || pf);
     })();
 
     // ⚠️ NOTHING HE READS SHOULD NEED A CLICK (2026-09-22). "Make sure this is
